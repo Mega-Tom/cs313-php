@@ -1,0 +1,58 @@
+body {
+    background : #000022;
+    color      : lime;
+    font       : 15px monospace;
+}
+
+.glow {
+    box-shadow : green 0px 0px 20px 5px,
+                 green 0px 0px 20px inset;
+}
+
+#main {
+   border : 2px solid white;
+   border-radius : 5px;
+   padding : 5px;
+   background : #555522;
+}
+@media only screen and (min-width: 600px) {
+    #main {
+        width : 600px;
+        margin : auto;
+    }
+}
+#main a{
+    color: white;
+}
+h1 {
+    border     : 2px solid green;
+    border-radius : 50px;
+    color      : lime;
+    padding    : 10px;
+    text-align : center;
+}
+h2 {
+    text-align : center;
+}
+
+.center{
+    margin: auto;
+}
+
+.lights td, .lights tr {
+    margen:0px;
+    padding: 0px;
+}
+
+.lights input {
+    display: none;
+}
+.lights input~label {
+    display: inline-block;
+    background: black;
+    width: 50px;
+    height: 50px;
+}
+.lights input:checked ~ label {
+    background: red;
+}
