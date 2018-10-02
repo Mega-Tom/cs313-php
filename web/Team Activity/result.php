@@ -16,6 +16,9 @@
                 echo "email</a>";
                 echo "<br>comment: " . $_POST["comments"];
                 echo "<br>major: " . $_POST["major"];
+                foreach($_POST["continents"] as $continent){
+                    echo "<br>You have picked $continent"
+                }
             }
         ?>
  
