@@ -9,7 +9,7 @@
 
     <section id="main">
  
-        <form action="/result.php" method="post">
+        <form action="result.php" method="post">
             Name:   <input type="text"  name="name"><br>
             E-mail: <input type="email" name="email"><br>
             Major:  <br>

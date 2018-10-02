@@ -11,7 +11,11 @@
     
         <?php 
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                echo $_POST["name"];
+                echo "Hello " . $_POST["name"];
+                echo "<a href='mailto:" . $_POST["email"] . "?body=" . $_POST["comments"] . "'>";
+                echo " email you</a>";
+                echo "<br>" . $_POST["comments"];
+                echo "<br>" . $_POST["major"];
             }
         ?>
  
