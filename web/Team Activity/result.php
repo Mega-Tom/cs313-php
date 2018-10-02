@@ -12,10 +12,10 @@
         <?php 
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Hello " . $_POST["name"];
-                echo "<a href='mailto:" . $_POST["email"] . "?body=" . $_POST["comments"] . "'>";
-                echo " email you</a>";
-                echo "<br>" . $_POST["comments"];
-                echo "<br>" . $_POST["major"];
+                echo ": <a href='mailto:" . $_POST["email"] . "?body=" . $_POST["comments"] . "'>";
+                echo "email</a>";
+                echo "<br>comment: " . $_POST["comments"];
+                echo "<br>major: " . $_POST["major"];
             }
         ?>
  
