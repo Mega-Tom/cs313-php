@@ -29,7 +29,7 @@
         
         <ul id="store">
         <?php
-            foreach($cart as $item){
+            foreach($cart as $id => $item){
                 echo "<li>";
                 $goods[$item]->display();
                 echo "\n<button value='$id'>Remove</button>\n";

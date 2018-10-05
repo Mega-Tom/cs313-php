@@ -14,6 +14,7 @@ $("#store button").click(function(){
         data: {product: this.value, action: "remove"}, 
         success: function(){
             alert("Item removed from cart");
+            this.parent().parent().remove();
         },
         error: function(){
             alert("You have encounterd an error");
