@@ -1,8 +1,8 @@
 <?php 
 class Good { 
-    public $price = 7; 
-    public $name = Watter;
-    public $discription = "a nice drink.";
+    public $price; 
+    public $name;
+    public $discription;
     
     
     function __construct($p, $n, $d) {
