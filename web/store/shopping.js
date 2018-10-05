@@ -1,6 +1,13 @@
 $("#store button").click(function(){
-    $.post("buy.php", {product: this.value}, function(){
-        alert("You bought it!");
+    $.post({
+        url: "change_cart.php",
+        data: {action: "add", product: this.value}, 
+        success: function(){
+            alert("Item Sucsefully added to cart");
+        },
+        error: function(){
+            alert("You have encounterd an error");
+        }
     });
     
 });

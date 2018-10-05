@@ -22,6 +22,10 @@
         <p>
             What woluld you like to buy?
         </p>
+        <div class="center">
+            <a href="cart.php">View Cart</a>
+        </div>
+        
         <ul id="store">
         <?php
             foreach($goods as $id => $good){

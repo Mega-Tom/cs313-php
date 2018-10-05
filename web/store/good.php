@@ -12,14 +12,14 @@ class Good {
     }
     function display() { 
         echo "\n<h3>" . $this->name;
-        echo money_format(" <span>%i</span></h3>", $this->price);
+        echo money_format(" <span>\$%i</span></h3>", $this->price);
         echo "\n<p> " . $this->discription . " </p>"; 
     } 
 } 
 
 $goods = array(
     new Good(5, "Wood", "Cut fresh from a pine tree."),
-    new Good(8, "Iron", "Atomic symbl Fe."),
-    new Good(3, "Stone", "Five thosend years old volcanic rock.")
+    new Good(8, "Iron", "Atomic symbol Fe."),
+    new Good(3, "Stone", "Five-million-year-old volcanic rock.")
 );
 ?> 

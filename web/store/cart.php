@@ -20,13 +20,25 @@
     <h1 class="center glow"> Cart </h1>
     
     <section id="main">
+    
+        <div class="center nav">
+            <a href="index.php">Back to shop</a>
+            <a href="checkout.php">Checkout</a>
+            <a href="#" id="clear">Clear cart</a>
+        </div>
+        
+        <ul id="store">
         <?php
             foreach($cart as $item){
+                echo "<li>";
                 $goods[$item]->display();
+                echo "\n<button value='$id'>Remove</button>\n";
+                echo "</li>";
             }
         ?>
+        </ul>
     </section>
     
-    <script src="shopping.js"></script>
+    <script src="cart.js"></script>
 </body>
 </html>
