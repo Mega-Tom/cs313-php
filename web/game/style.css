@@ -1,0 +1,56 @@
+body {
+    background-image: url("wood.png");
+}
+
+#main {
+    background    : gold;
+    border-radius : 5px;
+    border        : 5px outset goldenrod;
+    padding       : 5px;
+   
+}
+@media only screen and (min-width: 600px) {
+    #main {
+        width : 600px;
+        margin : auto;
+    }
+}
+
+h1 {
+    background: gold;
+    border-radius: 5px;
+    border: 5px outset goldenrod;
+    width: 50%;
+}
+
+.center{
+    margin: auto;
+    text-align: center;
+}
+
+header{
+    
+    background-color: black;
+    color: white;
+    position: relative;
+    top: -10px;
+    //left: -10px;
+    padding: 20px;
+}
+
+header a{
+    color: white;
+    border-radius: 0px 0px 10px 10px;
+    border-bottom: 3px solid white;
+    border-right: 3px solid white;
+    border-left: 3px solid white;
+    padding: 5px;
+    text-decoration: none;
+    text-transform: uppercase;
+    
+    position: relative;
+    top: 0px;
+}
+header a:hover{
+    top: 4px;
+}
