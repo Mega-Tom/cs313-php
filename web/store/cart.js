@@ -8,13 +8,13 @@ $("#clear").click(function(){
     });
 });
 
-$("#store button").click(function(){
+$("#store button").click(function(event){
     $.post({
         url: "change_cart.php",
-        data: {product: this.value, action: "remove"}, 
+        data: {index: this.value, action: "remove"}, 
         success: function(){
             alert("Item removed from cart");
-            $(this).parent().parent().remove();
+            $(event.target).parent().remove();
         },
         error: function(){
             alert("You have encounterd an error");
