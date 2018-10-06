@@ -56,3 +56,17 @@ h2 {
 .lights input:checked ~ label {
     background: red;
 }
+
+#store li {
+    list-style-type: none;
+    border: 4px outset green;
+    padding: 5px 20px;
+}
+
+#store span {
+    font-family: sans-serif;
+    font-size: smaller;
+    font-weight: lighter;
+    color: khaki;
+    float: right;
+}
