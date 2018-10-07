@@ -13,7 +13,6 @@ $("#store button").click(function(event){
         url: "change_cart.php",
         data: {index: this.value, action: "remove"}, 
         success: function(){
-            alert("Item removed from cart");
             $(event.target).parent().remove();
         },
         error: function(){
