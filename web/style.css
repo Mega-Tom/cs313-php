@@ -37,6 +37,7 @@ h2 {
 
 .center{
     margin: auto;
+    text-align: center;
 }
 
 .lights td, .lights tr {

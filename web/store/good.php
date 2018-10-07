@@ -17,9 +17,12 @@ class Good {
     } 
 } 
 
+
+//This is where to add any goods we want to sell.
+//I was going to change these, but ran out of time.
 $goods = array(
-    new Good(5, "Wood", "Cut fresh from a pine tree."),
-    new Good(8, "Iron", "Atomic symbol Fe."),
-    new Good(3, "Stone", "Five-million-year-old volcanic rock.")
+    new Good(5.00, "Wood", "Cut fresh from a pine tree."),
+    new Good(8.25, "Iron", "Atomic symbol Fe."),
+    new Good(3.99, "Stone", "Five-million-year-old volcanic rock.")
 );
 ?> 

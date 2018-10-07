@@ -39,7 +39,8 @@
         ?>
         </ul>
         <?php
-            echo money_format('<h4>$%i</h4>', $total);
+            echo money_format('<h4>For a total price of: $%i</h4>', $total);
+            echo "<p>Will be shipped to:</p>"
             echo '<div class="address">';
             echo "$name <br>";
             echo "$adr1 <br>";
@@ -49,6 +50,7 @@
             echo "$city, $state $zip<br>";
             echo "</div>";
         ?>
+        <a href="index.php">Back to shop</a>
     </section>
     
     <script src="cart.js"></script>
