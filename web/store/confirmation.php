@@ -8,6 +8,7 @@
     }
     $cart = $_SESSION["cart"];
     
+    $name = htmlspecialchars($_POST["name"]);
     $adr1 = htmlspecialchars($_POST["adr1"]);
     $adr2 = htmlspecialchars($_POST["adr2"]);
     $city = htmlspecialchars($_POST["city"]);
