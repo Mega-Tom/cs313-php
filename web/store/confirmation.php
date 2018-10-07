@@ -31,11 +31,11 @@
         <ul id="store">
         <?php
             $total = 0;
-            foreach($cart as $id => $item){
+            foreach($cart as $item){
                 echo "<li>";
                 $goods[$item]->display();
                 echo "</li>";
-                $total += $item->price;
+                $total += $goods[$item]->price;
             }
         ?>
         </ul>
