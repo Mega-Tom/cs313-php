@@ -8,11 +8,11 @@
     }
     $cart = $_SESSION["cart"];
     
-    $adr1 = htmlchars($_POST["adr1"]);
-    $adr2 = htmlchars($_POST["adr2"]);
-    $city = htmlchars($_POST["city"]);
-    $state = htmlchars($_POST["state"]);
-    $zip = htmlchars($_POST["zip"]);
+    $adr1 = htmlspecialchars($_POST["adr1"]);
+    $adr2 = htmlspecialchars($_POST["adr2"]);
+    $city = htmlspecialchars($_POST["city"]);
+    $state = htmlspecialchars($_POST["state"]);
+    $zip = htmlspecialchars($_POST["zip"]);
 ?>
 <html>
 <head>
