@@ -17,7 +17,7 @@
 ?>
 <html>
 <head>
-    <title>Cart</title>
+    <title>Confirmation</title>
     <link rel="stylesheet" href="../style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -27,7 +27,9 @@
     <h1 class="center glow"> Confirmation </h1>
     
     <section id="main">
-        
+        <?php
+            var_dump($cart);
+        ?>
         <ul id="store">
         <?php
             $total = 0;

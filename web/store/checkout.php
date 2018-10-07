@@ -24,6 +24,8 @@
             <a href="#" id="clear">Clear cart</a>
         </div>
         
+        <h2>Enter shipping information:</h2>
+        
         <form action="confirmation.php" method="POST">
             name: <input name="name">
             <br>adderess line 1:<input name="adr1">
