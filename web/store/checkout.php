@@ -26,6 +26,8 @@
     
     <section id="main">
     
+        <a href="cart.php">return to cart</a>
+    
         <div class="center nav">
             <a href="index.php">Back to shop</a>
             <a href="checkout.php">Checkout</a>
