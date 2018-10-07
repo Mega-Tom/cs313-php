@@ -3,7 +3,7 @@
     
     if($_POST["action"] == "add")
     {
-        $_SESSION["cart"][] = $_POST["product"];
+        $_SESSION["cart"][] = (int)$_POST["product"];
     }
     else if($_POST["action"] == "remove")
     {

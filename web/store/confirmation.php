@@ -27,9 +27,6 @@
     <h1 class="center glow"> Confirmation </h1>
     
     <section id="main">
-        <?php
-            var_dump($cart);
-        ?>
         <ul id="store">
         <?php
             $total = 0;
