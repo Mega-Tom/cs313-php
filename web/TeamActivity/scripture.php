@@ -12,15 +12,22 @@
     <h1 class="glow"> Scripture Resources </h1>
 
     <section id="main">
+    
+        <a href="search.php">
+            Search...
+        </a>
+    
         <?php
         
-        foreach ($db->query('SELECT book, chapter, verse, id FROM Scriptures') as     $row)
+        $q = 'SELECT book, chapter, verse, id FROM Scriptures';
+        
+        if(isset($_GET["book"])) $q = $q . " where book like '%" . $_GET["book"] . "%'";
+        
+        foreach ($db->query($q) as  $row)
         {
-            if(!isset($_GET["book"]) || $row['book'] == $_GET["book"]){
                 echo '<a href="scripturedetails.php?id='.$row["id"].'"> '.
                     $row['book']." ".$row['chapter'].":".$row['verse']. "</a>";
                 echo '<br/><br/>';
-            }
         }
         ?>
 
