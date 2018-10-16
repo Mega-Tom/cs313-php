@@ -15,9 +15,11 @@
     
     <?php
             
-        foreach ($db->query('SELECT id, content FROM Scriptures') as $row){
-            if($_GET["id"] == $row["id"])
-                echo $row["content"];
+        foreach ($db->query('SELECT id, book, chapter, verse, content FROM Scriptures') as $row){
+            if($_GET["id"] == $row["id"]) {
+                echo "<b> ".$row['book']." ".$row['chapter'].":".$row['verse']. "</b> - ";
+                echo '"'. $row['content'] . '"';
+            }
         }
     ?>
 
