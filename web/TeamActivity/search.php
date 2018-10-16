@@ -1,7 +1,3 @@
-<?php
-    require "dbconnect.php";
-?>
-
 <html>
 <head>
     <title>Search</title>
