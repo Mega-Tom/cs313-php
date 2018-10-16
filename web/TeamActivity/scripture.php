@@ -14,13 +14,25 @@
     <section id="main">
         <?php
         
-        foreach ($db->query('SELECT book, chapter, verse, content FROM Scriptures') as $row)
-        {
-          echo "<b> ".$row['book']." ".$row['chapter'].":".$row['verse']. "</b> - ";
-          echo '"'. $row['content'] . '"';
-          echo '<br/>';
+        if(isset($_GET["book"])){
+            foreach ($db->query('SELECT book, chapter, verse, content FROM Scriptures') as     $row)
+            {
+                if($row['book'] == $_GET["book"]){
+                      echo "<b> ".$row['book']." ".$row['chapter'].":".$row['verse']. "</b> - ";
+                      echo '"'. $row['content'] . '"';
+                      echo '<br/><br/>';
+              }
+            }
         }
-        
+        else
+        {
+            foreach ($db->query('SELECT book, chapter, verse, content FROM Scriptures') as $row)
+            {
+              echo "<b> ".$row['book']." ".$row['chapter'].":".$row['verse']. "</b> - ";
+              echo '"'. $row['content'] . '"';
+              echo '<br/><br/>';
+            }
+            }
         ?>
 
      </section>
