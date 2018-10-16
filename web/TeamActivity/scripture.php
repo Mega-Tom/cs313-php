@@ -16,7 +16,7 @@
         <a href="search.php">
             Search...
         </a>
-    
+        <br/>
         <?php
         
         $q = 'SELECT book, chapter, verse, id FROM Scriptures';
