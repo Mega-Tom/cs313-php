@@ -12,8 +12,8 @@
     $adr1 = htmlspecialchars($_POST["adr1"]);
     $adr2 = htmlspecialchars($_POST["adr2"]);
     $city = htmlspecialchars($_POST["city"]);
-    $state = htmlspecialchars($_POST["state"]);
-    $zip = htmlspecialchars($_POST["zip"]);
+    $state= htmlspecialchars($_POST["state"]);
+    $zip  = htmlspecialchars($_POST["zip"]);
 ?>
 <html>
 <head>

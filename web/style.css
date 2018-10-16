@@ -71,3 +71,8 @@ h2 {
     color: khaki;
     float: right;
 }
+
+div.address {
+    text-align: center;
+    border: solid black;
+}
