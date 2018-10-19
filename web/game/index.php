@@ -24,7 +24,7 @@
                 'JOIN player p ON player2Id = player.id ' .
                 'WHERE player1Id = :player'
             );
-        $q->bind(":player", $_SESSION["user"]);
+        $q->bindParam(":player", $_SESSION["user"]);
         $q->execute();
         
         echo "<h2> Games: </h2>";
