@@ -20,8 +20,8 @@
     if(isset($_SESSION["user"])){
         $db = get_db();
         $q = $db->prepare(
-            'SELECT p.playername "opponent", g.id "game" FROM GameDouble g ' .
-                'JOIN player p ON player2Id = player.id ' .
+            'SELECT p.playername as "opponent", g.id as "game" FROM GameDouble g ' .
+                'JOIN player p ON player2Id = p.id ' .
                 'WHERE player1Id = :player'
             );
         $q->bindParam(":player", $_SESSION["user"]);
