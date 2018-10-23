@@ -22,7 +22,7 @@
         $q = $db->prepare(
             'SELECT p.playername as "opponent", g.id as "game" FROM GameDouble g ' .
                 'JOIN player p ON player2Id = p.id ' .
-                'WHERE player1Id = :player'
+                'WHERE player1Id = :player ;'
             );
         $q->bindParam(":player", $_SESSION["user"]);
         $q->execute();

@@ -14,10 +14,15 @@ player1Id int REFERENCES Player(id),
 player2Id int REFERENCES Player(id),
 initalSetup int[]);
 
-CREATE TABLE Move(
+CREATE TABLE "Move"(
 id SERIAL Primary Key,
 fromsqare int,
 tosquare int,
 seq int,
 gameID int REFERENCES Game(id));
 
+CREATE VIEW GameDouble AS
+    SELECT id, player1Id, player2Id, bool 'n' AS fliped from games
+    UNION
+    SELECT id, player2ID, player1Id, bool 'y' AS fliped from games;
+    

@@ -1,6 +1,14 @@
 <?php
     session_start();
+    require "_stratego.php";
     
+    $player = get_player($_SESSION["user"], $_GET["id"]);
+    if(!$player)
+    {
+        http_response_code(403);
+        include('error.php'); 
+        die();
+    }
 ?>
 <html>
 <head>
@@ -14,10 +22,30 @@
     <h1 class="center"> Stratigo Online </h1>
     
     <section id="main">
-        <p>
-            
-        </p>
+    <table><tbody>
+<?php
+    $board = board_position($_GET["id"]);
+    for($board as $y => $row)
+    {
+        echo "<tr>";
+        for($row as $x => $piece)
+        {
+            echo("<td>");
+            if($piece)
+            {
+                if($piece->owner == $player)
+                    echo($piece->value);
+                else
+                    echo("?");
+            }
+            echo("</td>");
+        }
+        echo "</tr>";
+    }
+?>
+    </tbody></table>
     </section>
     
 </body>
 </html>
+

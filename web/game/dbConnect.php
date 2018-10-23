@@ -8,6 +8,10 @@
 * is executing at heroku.
 ***********************************************************/
 function get_db() {
+    if(isSet($GLOBALS['db']))
+    {
+        return $GLOBALS['db'];
+    }
 	$db = NULL;
 	try {
 		// default Heroku Postgres configuration URL
