@@ -17,7 +17,7 @@
             Book: <input type="text" name="book"> <br>
             Chapter: <input type="text" name="chapter"> <br>
             verse: <input type="text" name="verse"> <br>
-            content: <textarea name="book"> <br>
+            content: <textarea name="book"></textarea> <br>
             <?php
             
             $q = 'SELECT name, id FROM Topics';
