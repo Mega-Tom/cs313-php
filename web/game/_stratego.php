@@ -1,5 +1,7 @@
 <?php
 
+require "dbConnect.php";
+
 define("BOMB", -1);
 define("FLAG", -2);
 define("SPY", 0);
