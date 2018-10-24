@@ -139,10 +139,10 @@ function get_player($gameid, $userid) {
     $q = $db->prepare("SELECT fliped FROM gamedouble where id = :game and player1Id = :user");
     $q->BindValue(":game", $gameid);
     $q->BindValue(":user", $userid);
-    $result = $q->Execute();
+    $q->Execute();
     
-    foreach($result->fetch_all() as $row) {
-        return fliped ? BLUE : RED;
+    foreach($q->fetch_all() as $row) {
+        return $row["fliped"] ? BLUE : RED;
     }
 }
 
