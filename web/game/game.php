@@ -25,10 +25,10 @@
     <table class="board"><tbody>
 <?php
     $board = board_position($_GET["id"]);
-    for($board as $y => $row)
+    foreach($board as $y => $row)
     {
         echo "<tr>";
-        for($row as $x => $piece)
+        foreach($row as $x => $piece)
         {
             echo("<td>");
             if($piece)

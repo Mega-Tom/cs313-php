@@ -49,7 +49,7 @@ function valid_setup($positions) {
         SPY => 1,
         FLAG => 1
     );
-    for(Array(0,40) as $start){
+    foreach(Array(0,40) as $start){
         $pececounts = array_count_values(array_slice($positions, $start, 40));
         if($pececounts != $piece_set) return false;
     }
@@ -62,7 +62,7 @@ function setup_board($positions) {
     for($i = 0; $i < 10; $i++) {
         $board[$i] = array_fill(0, 10, NULL);
     }
-    for( as $i=>$v) {
+    foreach($positions as $i=>$v) {
         if($i <= 40){
             $board[intdiv($i, 10)][$i % 10] = new Piece(RED, $v);
         }else{
@@ -88,7 +88,7 @@ function board_position($id) {
     $q->BindValue(":id", $id);
     $result = $q->Execute();
     
-    for($result->fetch_all() as $row){
+    foreach($result->fetch_all() as $row){
         $board = setup_board($row["initalsetup"]);
     }
     
@@ -98,7 +98,7 @@ function board_position($id) {
     
     $old_i = 0;
     
-    for($result->fetch_all() as $row){
+    foreach($result->fetch_all() as $row){
         $from = $row["fromsquare"];
         $fy = intdiv($from, 10);
         $fx = $from % 10;
