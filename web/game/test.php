@@ -18,7 +18,7 @@
     $db = get_db();
     $query_string = "SELECT numbers[1]";
     for($i = 2; $i <= 4; $i++) {
-        $query_string = $query_string . ",numbers[$i]"
+        $query_string = $query_string . ",numbers[$i]";
     }
     $query_string = $query_string." FROM test";
     $q = $db->prepare($query_string);
