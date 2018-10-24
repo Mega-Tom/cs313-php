@@ -16,7 +16,12 @@
     <section id="main">
 <?php
     $db = get_db();
-    $q = $db->prepare("SELECT numbers[1:8] FROM test");
+    $query_string = "SELECT numbers[1]";
+    for($i = 2; $i <= 4; $i++) {
+        $query_string = $query_string . ",numbers[$i]"
+    }
+    $query_string = $query_string." FROM test";
+    $q = $db->prepare($query_string);
     $q->Execute();
     
     foreach($q->fetchAll() as $k => $v) {
