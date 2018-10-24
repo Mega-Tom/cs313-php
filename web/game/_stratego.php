@@ -86,7 +86,7 @@ function in_range($x1, $y1, $x2, $y2) {
 
 function board_position($id) {
     $db = get_db();
-    $q = $db->prepare("SELECT initalSetup FROM game where id = :id");
+    $q = $db->prepare("SELECT initalSetup[1:80] FROM game where id = :id");
     $q->BindValue(":id", $id);
     $q->Execute();
     
