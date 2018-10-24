@@ -4,8 +4,8 @@ define("BOMB", -1);
 define("FLAG", -2);
 define("SPY", 0);
 
-define("RED", false);
-define("BLUE", true);
+define("RED",  1);
+define("BLUE", 2);
 
 class Piece {
     public $owner;
@@ -88,7 +88,7 @@ function board_position($id) {
     $q->BindValue(":id", $id);
     $result = $q->Execute();
     
-    foreach($result->fetch_all() as $row){
+    foreach($result->fetch_all() as $row) {
         $board = setup_board($row["initalsetup"]);
     }
     
@@ -98,7 +98,7 @@ function board_position($id) {
     
     $old_i = 0;
     
-    foreach($result->fetch_all() as $row){
+    foreach($result->fetch_all() as $row) {
         $from = $row["fromsquare"];
         $fy = intdiv($from, 10);
         $fx = $from % 10;
@@ -132,7 +132,17 @@ function board_position($id) {
     return $board;
 }
 
-
+function get_player($gameid, $userid) {
+    $db = get_db();
+    $q = $db->prepare("SELECT fliped FROM gamedouble where id = :game and player1Id = :user");
+    $q->BindValue(":game", $gameid);
+    $q->BindValue(":user", $userid);
+    $result = $q->Execute();
+    
+    foreach($result->fetch_all() as $row) {
+        return fliped ? BLUE : RED;
+    }
+}
 
 
 ?>
