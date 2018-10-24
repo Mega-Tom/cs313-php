@@ -88,19 +88,19 @@ function board_position($id) {
     $db = get_db();
     $q = $db->prepare("SELECT initalSetup FROM game where id = :id");
     $q->BindValue(":id", $id);
-    $result = $q->Execute();
+    $q->Execute();
     
-    foreach($result->fetch_all() as $row) {
+    foreach($q->fetchall() as $row) {
         $board = setup_board($row["initalsetup"]);
     }
     
     $q = $db->prepare("SELECT fromsquare, tosquare, seq FROM move WHERE gameid = :id ORDER by seq");
     $q->BindValue(":id", $id);
-    $result = $q->Execute();
+    $q->Execute();
     
     $old_i = 0;
     
-    foreach($result->fetch_all() as $row) {
+    foreach($q->fetchall() as $row) {
         $from = $row["fromsquare"];
         $fy = intdiv($from, 10);
         $fx = $from % 10;
@@ -141,7 +141,7 @@ function get_player($gameid, $userid) {
     $q->BindValue(":user", $userid);
     $q->Execute();
     
-    foreach($q->fetch_all() as $row) {
+    foreach($q->fetchall() as $row) {
         return $row["fliped"] ? BLUE : RED;
     }
 }
