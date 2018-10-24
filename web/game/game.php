@@ -22,7 +22,7 @@
     <h1 class="center"> Stratigo Online </h1>
     
     <section id="main">
-    <table><tbody>
+    <table class="board"><tbody>
 <?php
     $board = board_position($_GET["id"]);
     for($board as $y => $row)
