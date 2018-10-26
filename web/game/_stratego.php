@@ -86,12 +86,18 @@ function in_range($x1, $y1, $x2, $y2) {
 
 function board_position($id) {
     $db = get_db();
-    $q = $db->prepare("SELECT initalSetup[1:80] FROM game where id = :id");
+    $query_string = "SELECT initalSetup[1]";
+    for($i = 2; $i <= 80; $i++) {
+        $query_string = $query_string . ",initalSetup[$i]";
+    }
+    $query_string = $query_string." FROM game where id = :id"";
+    
+    $q = $db->prepare($query_string);
     $q->BindValue(":id", $id);
     $q->Execute();
     
-    foreach($q->fetchall() as $row) {
-        $board = setup_board($row["initalsetup"]);
+    foreach($q->fetchall(PDO::FETCH_NUM) as $row) {
+        $board = setup_board($row);
     }
     
     $q = $db->prepare("SELECT fromsquare, tosquare, seq FROM move WHERE gameid = :id ORDER by seq");
