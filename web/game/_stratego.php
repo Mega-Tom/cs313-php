@@ -35,7 +35,7 @@ class Piece {
 }
 
 function valid_setup($positions) {
-    if(count($positions) != 80)
+    if(count($positions) != 80 || $positions[79] === NULL)
         return false;
     $piece_set = Array(
         BOMB => 6,
