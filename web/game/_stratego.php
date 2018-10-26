@@ -123,6 +123,8 @@ function board_position($id) {
         
         $i = $row["seq"];
         if($i != $old_i + 1) throw new Error("move jump between $old_i and $i");
+        $old_i = $i;
+        
         $current = array(RED, BLUE)[$i % 2];
         
         $mover = $board[$fy][$fy];
