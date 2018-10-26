@@ -65,7 +65,7 @@ function setup_board($positions) {
         $board[$i] = array_fill(0, 10, NULL);
     }
     foreach($positions as $i=>$v) {
-        if($i <= 40){
+        if($i < 40){
             $board[intdiv($i, 10)][$i % 10] = new Piece(RED, $v);
         }else{
             $board[intdiv($i, 10) + 2][$i % 10] = new Piece(BLUE, $v);

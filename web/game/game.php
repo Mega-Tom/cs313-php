@@ -30,13 +30,18 @@
         echo "<tr>";
         foreach($row as $x => $piece)
         {
-            echo("<td>");
+            echo("<td");
             if($piece)
             {
+                echo(" class=" .  ($piece->owner == RED ? '"red"':'"blue"') . ">");
                 if($piece->owner == $player)
                     echo($piece->value);
                 else
                     echo("?");
+            }
+            else
+            {
+               echo(">");
             }
             echo("</td>");
         }
