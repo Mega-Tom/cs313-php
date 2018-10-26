@@ -35,7 +35,7 @@
             {
                 echo(" class=" . ($piece->owner == RED ? '"red"':'"blue"') . ">");
                 if($piece->owner == $player)
-                    echo($piece->value);
+                    echo($piece->str());
             }
             else
             {
