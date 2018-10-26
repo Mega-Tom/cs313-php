@@ -32,6 +32,12 @@ class Piece {
         }
         return "TIE";
     }
+    function str() {
+        if($this->value == SPY) return "S";
+        if($this->value == BOMB) return "Q";
+        if($this->value == FLAG) return "F";
+        return (string)$this->value;
+    }
 }
 
 function valid_setup($positions) {
