@@ -90,7 +90,7 @@ function board_position($id) {
     for($i = 2; $i <= 80; $i++) {
         $query_string = $query_string . ",initalSetup[$i]";
     }
-    $query_string = $query_string." FROM game where id = :id"";
+    $query_string = $query_string." FROM game where id = :id";
     
     $q = $db->prepare($query_string);
     $q->BindValue(":id", $id);
