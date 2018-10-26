@@ -127,13 +127,13 @@ function board_position($id) {
         
         $current = array(RED, BLUE)[$i % 2];
         
-        $mover = $board[$fy][$fy];
+        $mover = $board[$fy][$fx];
         if(
             $mover == NULL ||
             $mover->owner != $current ||
             $mover->value == BOMB ||
             $mover->value == FLAG) {throw new Error("cannot move from square $from (on move $i)");}
-        $board[$fy][$fy] = NULL;
+        $board[$fy][$fx] = NULL;
         $targ = $board[$ty][$tx];
         if(! in_range($fx, $fy, $tx, $ty)) {throw new Error("cannot move from square $from to $to (on move $i)");}
         if($targ == NULL) {
