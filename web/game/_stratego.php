@@ -39,7 +39,7 @@ class Piece {
         return (string)$this->value;
     }
     function __toString() {
-        return "{owner: ".$this->owner.", value: ".$this->value."}";
+        return "{owner: ".$this->owner.", value: ".$this->str()."}";
     }
 }
 
@@ -108,7 +108,7 @@ function do_move(&$board, $from, $to, $i) {
         $mover->owner != $current) {throw new Error("player $current cannot move from square $from (on move $i)");}
     if(
         $mover->value == BOMB ||
-        $mover->value == FLAG) {throw new Error("cannot move immobile piece $mover (on move $i)");}
+        $mover->value == FLAG) {throw new Error("cannot move immobile piece $mover from square $from (on move $i)");}
     $board[$fy][$fx] = NULL;
     $targ = $board[$ty][$tx];
     if(! in_range($fx, $fy, $tx, $ty)) {throw new Error("cannot move from square $from to $to (on move $i)");}
@@ -152,6 +152,7 @@ function board_position($id) {
         
         do_move($board, $row["fromsquare"], $row["tosquare"], $i);
     }
+    var_dump($board);//DEBUG only
     return $board;
 }
 
