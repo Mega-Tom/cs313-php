@@ -14,7 +14,7 @@ $db = get_db();
 
 $q = $db->prepare('select player1id, player2id, (select count(*) from move where gameid = game.id) as "count" from game where id = :gameid');
 $q->bindValue(":gameid", $_POST["game"], PDO::PARAM_INT);
-$q-execute();
+$q->execute();
 $result = $q->fetchALL();
 
 if(! isset($result[0]))
@@ -40,4 +40,4 @@ $q->bindValue(":from", $_POST["from"], PDO::PARAM_INT);
 $q->bindValue(":to", $_POST["to"], PDO::PARAM_INT);
 $q->bindValue(":seq", $seq, PDO::PARAM_INT);
 $q->bindValue(":game", $_POST["game"], PDO::PARAM_INT);
-$q-execute();
+$q->execute();
