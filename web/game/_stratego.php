@@ -90,21 +90,22 @@ function in_range($x1, $y1, $x2, $y2) {
     return false;
 }
 
-function do_move(&$board, $from, $to, $current) {
+function do_move(&$board, $from, $to, $i) {
     $fy = intdiv($from, 10);
     $fx = $from % 10;
     
     $ty = intdiv($to, 10);
     $tx = $to % 10;
     
-    
+    $current = array(RED, BLUE)[$i % 2];
     
     $mover = $board[$fy][$fx];
     if(
         $mover == NULL ||
-        $mover->owner != $current ||
+        $mover->owner != $current) {throw new Error("player $current cannot move from square $from (on move $i)");}
+    if(
         $mover->value == BOMB ||
-        $mover->value == FLAG) {throw new Error("cannot move from square $from (on move $i)");}
+        $mover->value == FLAG) {throw new Error("cannot move immobile piece (on move $i)");}
     $board[$fy][$fx] = NULL;
     $targ = $board[$ty][$tx];
     if(! in_range($fx, $fy, $tx, $ty)) {throw new Error("cannot move from square $from to $to (on move $i)");}
@@ -146,7 +147,7 @@ function board_position($id) {
         if($i != $old_i + 1) throw new Error("move jump between $old_i and $i");
         $old_i = $i;
         
-        do_move($board, $row["fromsquare"], $row["tosquare"], array(RED, BLUE)[$i % 2]);
+        do_move($board, $row["fromsquare"], $row["tosquare"], $i);
     }
     return $board;
 }
