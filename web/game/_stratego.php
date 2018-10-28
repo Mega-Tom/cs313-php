@@ -68,7 +68,7 @@ function valid_setup($positions) {
 }
 
 function setup_board($positions) {
-    if(!valid_setup($positions)) {throw new Error("invalid setup");}
+    if(!valid_setup($positions)) {throw new Exception("invalid setup");}
     $board = array();
     for($i = 0; $i < 10; $i++) {
         $board[$i] = array_fill(0, 10, NULL);
@@ -105,17 +105,17 @@ function do_move(&$board, $from, $to, $i) {
     $mover = $board[$fy][$fx];
     if(
         $mover == NULL ||
-        $mover->owner != $current) {throw new Error("player $current cannot move from square $from (on move $i)");}
+        $mover->owner != $current) {throw new Exception("player $current cannot move from square $from (on move $i)");}
     if(
         $mover->value == BOMB ||
-        $mover->value == FLAG) {throw new Error("cannot move immobile piece $mover from square $from (on move $i)");}
+        $mover->value == FLAG) {throw new Exception("cannot move immobile piece $mover from square $from (on move $i)");}
     $board[$fy][$fx] = NULL;
     $targ = $board[$ty][$tx];
-    if(! in_range($fx, $fy, $tx, $ty)) {throw new Error("cannot move from square $from to $to (on move $i)");}
+    if(! in_range($fx, $fy, $tx, $ty)) {throw new Exception("cannot move from square $from to $to (on move $i)");}
     if($targ == NULL) {
         $board[$ty][$tx] = $mover;
     }else {
-        if($mover->owner == $targ->owner) {throw new Error("cannot attack own peice (on move $i)");}
+        if($mover->owner == $targ->owner) {throw new Exception("cannot attack own peice (on move $i)");}
         if($mover->attack($targ)){
             $board[$ty][$tx] = $mover;
         }
@@ -147,7 +147,7 @@ function board_position($id) {
     foreach($q->fetchall() as $row) {
         
         $i = $row["seq"];
-        if($i != $old_i + 1) throw new Error("move jump between $old_i and $i");
+        if($i != $old_i + 1) throw new Exception("move jump between $old_i and $i");
         $old_i = $i;
         
         do_move($board, $row["fromsquare"], $row["tosquare"], $i);

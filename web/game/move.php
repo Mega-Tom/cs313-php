@@ -35,8 +35,13 @@ if($_SESSION["user"] != $next_player_id)
 
 
 $board = board_position($_POST["game"]);
-do_move($board, $_POST["from"], $_POST["to"], $seq);
-
+try{
+    do_move($board, $_POST["from"], $_POST["to"], $seq);
+}catch(Exception $e) {
+    error_log("GAME: ".$e->getMessage());
+    http_response_code(400);
+    die();
+}
 
 $q = $db->prepare("insert into move(fromsquare,tosquare,seq,gameid) values (:from, :to, :seq, :game)");
 $q->bindValue(":from", $_POST["from"], PDO::PARAM_INT);
