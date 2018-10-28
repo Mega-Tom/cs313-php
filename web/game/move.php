@@ -8,6 +8,7 @@ if(!isset($_SESSION["user"]))
     die();
 }
 
+require("dbConnect.php");
 require("_stratego.php");
 
 $db = db_connect();

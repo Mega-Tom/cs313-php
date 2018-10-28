@@ -11,9 +11,8 @@ function in_range(x1, y1, x2, y2) {
 $(function(){
 
     $(".board tr").each(function(y, row){
-        $(row).children().each{function(x, cell){
-            cell.data("x", x);
-            cell.data("y", y);
+        $(row).children().each(function(x, cell){
+            $(cell).data("x", x).data("y", y);
         });
     });
     
@@ -29,7 +28,7 @@ $(function(){
                     data: {
                         from: fx + 10 * fy,
                         to:   tx + 10 * ty,
-                        game: new URL(window.location.href).searchParams.get("id");
+                        game: new URL(window.location.href).searchParams.get("id")
                     },
                     success: function(){
                         reload();
