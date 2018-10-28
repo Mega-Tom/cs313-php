@@ -22,6 +22,7 @@
     <section id="main">
         <form action="postchalenge.php" method="post">
             Who would you like to chalenge? <input type="text" name="username"><br>
+            <input type="submit">
         </form>
         <?php 
             if(isSet($_GET["invalid"]))
