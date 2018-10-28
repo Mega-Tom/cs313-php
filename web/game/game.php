@@ -8,6 +8,7 @@
     $player = get_player($_SESSION["user"], $gameid);
     if(!$player)
     {
+        error_log("GAME: user:".$playerid." cannot accses game: ".$gameid);
         http_response_code(403);
         include('error.php'); 
         die();
