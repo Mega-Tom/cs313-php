@@ -5,10 +5,11 @@
     $gameid = $_GET["id"];
     $playerid = $_SESSION["user"];
     
-    $player = get_player($_SESSION["user"], $gameid);
+    $player = get_player($gameid, $playerid);
+    
     if(!$player)
     {
-        error_log("GAME: user:".$playerid." cannot accses game: ".$gameid);
+        error_log("GAME: user:".$playerid." cannot accses game:".$gameid);
         http_response_code(403);
         include('error.php'); 
         die();
@@ -56,7 +57,7 @@
 ?>
     </tbody></table>
     </section>
-    <?php if(current_player() == $player): ?>
+    <?php if(current_player($gameid) == $player): ?>
     <script src="game.js" />
     <?php endif; ?>
 </body>
