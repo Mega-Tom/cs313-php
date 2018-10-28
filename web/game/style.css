@@ -76,4 +76,5 @@ table.board td.blue{
 }
 table.board td.active{
     box-shadow: white inset 0px 0px 50px;
+    -webkit-box-shadow: white inset 0px 0px 50px;
 }

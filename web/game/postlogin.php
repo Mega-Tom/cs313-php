@@ -2,7 +2,7 @@
     session_start();
     require "dbConnect.php";
 
-    $nmae = $_POST["username"];
+    $nmae = strtolower($_POST["username"]);
     
     $db = get_db();
     

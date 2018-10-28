@@ -30,7 +30,7 @@
         echo "<ul>";
         foreach($q->fetchAll() as $row){
             $game = $row["game"];
-            $opponent = $row["opponent"];
+            $opponent = htmlspecialchars($row["opponent"]);
             echo "<li><a href='game.php?id=$game'> vs $opponent </a></li>";
         }
         echo "</ul>";
