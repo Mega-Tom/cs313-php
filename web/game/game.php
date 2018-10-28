@@ -59,11 +59,7 @@
     </section>
 <?php if(current_player($gameid) == $player): ?>
     <script src="game.js" type="text/javascript"></script>
-<?php 
-    else: 
-        error_log("GAME: current player:".current_player($gameid)."  active player:".$player);
-    endif; 
-?>
+<?php endif; ?>
 </body>
 </html>
 

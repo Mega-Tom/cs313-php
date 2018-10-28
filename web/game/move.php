@@ -17,12 +17,13 @@ $q->bindValue(":gameid", $_POST["game"], PDO::PARAM_INT);
 $q->execute();
 $result = $q->fetchALL();
 
-if(! isset($result[0]))
+if(! isSet($result[0]))
 {
+    error_log("GAME: no results for game:". $_POST["game"]. " => " . $result[0][0]);
     http_response_code(404); //invalid game
     die();
 }
-$seq = $result["count"] + 1;
+$seq = $result[0]["count"] + 1;
 
 $next_color = array(RED, BLUE)[$seq % 2];
 $next_player_id = array(RED => $result["player1id"], BLUE => $result["player2id"])[$next_color];
@@ -33,7 +34,10 @@ if($_SESSION["user"] != $next_player_id)
     die();
 }
 
+
 $board = board_position($_POST["game"]);
+do_move($board, $from, $to, $next_color);
+
 
 $q = $db.prepare("insert into move(fromsquare,tosquare,seq,gameid) values (:from, :to, :seq, :game)");
 $q->bindValue(":from", $_POST["from"], PDO::PARAM_INT);
