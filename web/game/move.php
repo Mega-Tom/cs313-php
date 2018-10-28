@@ -38,7 +38,7 @@ $board = board_position($_POST["game"]);
 do_move($board, $_POST["from"], $_POST["to"], $seq);
 
 
-$q = $db.prepare("insert into move(fromsquare,tosquare,seq,gameid) values (:from, :to, :seq, :game)");
+$q = $db->prepare("insert into move(fromsquare,tosquare,seq,gameid) values (:from, :to, :seq, :game)");
 $q->bindValue(":from", $_POST["from"], PDO::PARAM_INT);
 $q->bindValue(":to", $_POST["to"], PDO::PARAM_INT);
 $q->bindValue(":seq", $seq, PDO::PARAM_INT);
