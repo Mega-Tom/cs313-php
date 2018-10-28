@@ -152,7 +152,6 @@ function board_position($id) {
         
         do_move($board, $row["fromsquare"], $row["tosquare"], $i);
     }
-    var_dump($board);//DEBUG only
     return $board;
 }
 

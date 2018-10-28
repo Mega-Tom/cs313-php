@@ -32,7 +32,7 @@ $(function(){
                         game: new URL(window.location.href).searchParams.get("id")
                     },
                     success: function(){
-                        reload();
+                        location.reload();
                     },
                     error: function(){
                         alert("move invalid!");
