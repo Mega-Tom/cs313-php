@@ -35,7 +35,7 @@ if($_SESSION["user"] != $next_player_id)
 
 
 $board = board_position($_POST["game"]);
-do_move($board, $from, $to, $seq);
+do_move($board, $_POST["from"], $_POST["to"], $seq);
 
 
 $q = $db.prepare("insert into move(fromsquare,tosquare,seq,gameid) values (:from, :to, :seq, :game)");
