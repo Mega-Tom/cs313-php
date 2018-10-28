@@ -24,7 +24,7 @@ if(! isSet($result[0]))
 $seq = $result[0]["count"] + 1;
 
 $next_color = array(RED, BLUE)[$seq % 2];
-$next_player_id = array(RED => $result[0]["player1id"], BLUE => $result["player2id"][0])[$next_color];
+$next_player_id = array(RED => $result[0]["player1id"], BLUE => $result[0]["player2id"])[$next_color];
 
 if($_SESSION["user"] != $next_player_id)
 {
