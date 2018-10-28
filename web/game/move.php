@@ -19,7 +19,6 @@ $result = $q->fetchALL();
 
 if(! isSet($result[0]))
 {
-    error_log("GAME: no results for game:". $_POST["game"]. " => " . $result[0][0]);
     http_response_code(404); //invalid game
     die();
 }

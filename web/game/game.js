@@ -25,6 +25,7 @@ $(function(){
                 ty = $(this).data("y");
             if(in_range(fx, fy, tx, ty)){
                 $.ajax("move.php", {
+                    method: "POST",
                     data: {
                         from: fx + 10 * fy,
                         to:   tx + 10 * ty,
