@@ -168,6 +168,8 @@ function current_player($gameid) {
     $db = get_db();
     $q = $db->prepare('select (select count(*) from move where gameid = game.id) as "count" from game where id = :gameid');
     $q->bindValue(":gameid", $gameid, PDO::PARAM_INT);
+    $q->Execute();
+    
     $result = $q->fetchALL();
     
     if(isSet($result[0])) {
