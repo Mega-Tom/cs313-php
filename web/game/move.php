@@ -1,11 +1,11 @@
 <?php
-
 session_start();
 
-if(!isset($_SESSION["user"]))
+if(! isSet($_SESSION["user"]))
 {
-    http_response_code(403);
-    die();
+    //http_response_code(403);
+    //die();
+    $_SESSION["user"] = 1; //THIS IS A BAD HACK-------REMOVE
 }
 
 require("_stratego.php");
@@ -19,7 +19,7 @@ $result = $q->fetchALL();
 
 if(! isSet($result[0]))
 {
-    http_response_code(404); //invalid game
+    http_response_code(404); //nonexistent game
     die();
 }
 $seq = $result[0]["count"] + 1;
