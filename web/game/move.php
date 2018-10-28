@@ -3,9 +3,8 @@ session_start();
 
 if(! isSet($_SESSION["user"]))
 {
-    //http_response_code(403);
-    //die();
-    $_SESSION["user"] = 1; //THIS IS A BAD HACK-------REMOVE
+    http_response_code(403);
+    die();
 }
 
 require("_stratego.php");
@@ -29,6 +28,7 @@ $next_player_id = array(RED => $result["player1id"], BLUE => $result["player2id"
 
 if($_SESSION["user"] != $next_player_id)
 {
+    error_log("GAME: user:".$_SESSION["user"]." cannot move for user:".$next_player_id);
     http_response_code(403);
     die();
 }
