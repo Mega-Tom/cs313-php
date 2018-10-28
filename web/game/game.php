@@ -2,7 +2,10 @@
     session_start();
     require "_stratego.php";
     
-    $player = get_player($_SESSION["user"], $_GET["id"]);
+    $gameid = $_GET["id"];
+    $playerid = $_SESSION["user"];
+    
+    $player = get_player($_SESSION["user"], $gameid);
     if(!$player)
     {
         http_response_code(403);
@@ -14,6 +17,10 @@
 <head>
     <title>Stratigo Online</title>
     <link rel="stylesheet" href="style.css">
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -48,7 +55,9 @@
 ?>
     </tbody></table>
     </section>
-    
+    <?php if(current_player() == $player): ?>
+    <script src="game.js" />
+    <?php endif; ?>
 </body>
 </html>
 

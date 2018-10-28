@@ -1,0 +1,41 @@
+<?php
+
+session_start();
+
+if(!isset($_SESSION["user"]))
+{
+    http_response_code(403);
+    die();
+}
+
+require("_stratego.php");
+
+$db = db_connect();
+
+$q = $db->prepare('select player1id, player2id, (select count(*) from move where gameid = game.id) as "count" from game where id = :gameid');
+$q->bindValue(":gameid", $_POST["game"], PDO::PARAM_INT);
+$result = $q->fetchALL();
+
+if(! isset($result[0]))
+{
+    http_response_code(404); //invalid game
+    die();
+}
+$seq = $result["count"] + 1;
+
+$next_color = array(RED, BLUE)[$seq % 2];
+$next_player_id = array(RED => $result["player1id"], BLUE => $result["player2id"])[$next_color];
+
+if($_SESSION["user"] != $next_player_id)
+{
+    http_response_code(403);
+    die();
+}
+
+$board = board_position($_POST["game"]);
+
+$q = $db.prepare("insert into move(fromsquare,tosquare,seq,gameid) values (:from, :to, :seq, :game)");
+$q->bindValue(":from", $_POST["from"], PDO::PARAM_INT);
+$q->bindValue(":to", $_POST["to"], PDO::PARAM_INT);
+$q->bindValue(":seq", $seq, PDO::PARAM_INT);
+$q->bindValue(":game", $_POST["game"], PDO::PARAM_INT);

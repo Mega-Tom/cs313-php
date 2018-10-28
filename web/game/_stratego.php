@@ -82,12 +82,40 @@ function setup_board($positions) {
 
 function in_range($x1, $y1, $x2, $y2) {
     if($x1 == $x2){
-        return $y2 = $y1 + 1 || $y2 = $y1 - 1;
+        return $y2 == $y1 + 1 || $y2 == $y1 - 1;
     }
     else if($y1 == $y2){
-        return $x2 = $x1 + 1 || $x2 = $x1 - 1;
+        return $x2 == $x1 + 1 || $x2 == $x1 - 1;
     }
     return false;
+}
+
+function do_move(&$board, $from, $to, $current) {
+    $fy = intdiv($from, 10);
+    $fx = $from % 10;
+    
+    $ty = intdiv($to, 10);
+    $tx = $to % 10;
+    
+    
+    
+    $mover = $board[$fy][$fx];
+    if(
+        $mover == NULL ||
+        $mover->owner != $current ||
+        $mover->value == BOMB ||
+        $mover->value == FLAG) {throw new Error("cannot move from square $from (on move $i)");}
+    $board[$fy][$fx] = NULL;
+    $targ = $board[$ty][$tx];
+    if(! in_range($fx, $fy, $tx, $ty)) {throw new Error("cannot move from square $from to $to (on move $i)");}
+    if($targ == NULL) {
+        $board[$ty][$tx] = $mover;
+    }else {
+        if($mover->owner == $targ->owner) {throw new Error("cannot attack own peice (on move $i)");}
+        if($mover->attack($targ)){
+            $board[$ty][$tx] = $mover;
+        }
+    }
 }
 
 function board_position($id) {
@@ -113,44 +141,19 @@ function board_position($id) {
     $old_i = 0;
     
     foreach($q->fetchall() as $row) {
-        $from = $row["fromsquare"];
-        $fy = intdiv($from, 10);
-        $fx = $from % 10;
-        
-        $to = $row["tosquare"];
-        $ty = intdiv($to, 10);
-        $tx = $to % 10;
         
         $i = $row["seq"];
         if($i != $old_i + 1) throw new Error("move jump between $old_i and $i");
         $old_i = $i;
         
-        $current = array(RED, BLUE)[$i % 2];
-        
-        $mover = $board[$fy][$fx];
-        if(
-            $mover == NULL ||
-            $mover->owner != $current ||
-            $mover->value == BOMB ||
-            $mover->value == FLAG) {throw new Error("cannot move from square $from (on move $i)");}
-        $board[$fy][$fx] = NULL;
-        $targ = $board[$ty][$tx];
-        if(! in_range($fx, $fy, $tx, $ty)) {throw new Error("cannot move from square $from to $to (on move $i)");}
-        if($targ == NULL) {
-            $board[$ty][$tx] = $mover;
-        }else {
-            if($mover->owner == $targ->owner) {throw new Error("cannot attack own peice (on move $i)");}
-            if($mover->attack($targ)){
-                $board[$ty][$tx] = $mover;
-            }
-        }
+        do_move($board, $row["fromsquare"], $row["tosquare"], array(RED, BLUE)[$i % 2]);
     }
     return $board;
 }
 
 function get_player($gameid, $userid) {
     $db = get_db();
-    $q = $db->prepare("SELECT fliped FROM gamedouble where id = :game and player1Id = :user");
+    $q = $db->prepare("SELECT fliped FROM gamedouble WHERE id = :game AND player1Id = :user");
     $q->BindValue(":game", $gameid);
     $q->BindValue(":user", $userid);
     $q->Execute();
@@ -158,7 +161,17 @@ function get_player($gameid, $userid) {
     foreach($q->fetchall() as $row) {
         return $row["fliped"] ? BLUE : RED;
     }
+    return false;
 }
 
-
-?>
+function current_player($gameid) {
+    $db = get_db();
+    $q = $db->prepare('select (select count(*) from move where gameid = game.id) as "count" from game where id = :gameid');
+    $q->bindValue(":gameid", $gameid, PDO::PARAM_INT);
+    $result = $q->fetchALL();
+    
+    if(isSet($result[0])) {
+        return array(BLUE, RED)[$result[0]["count"] % 2];
+    }
+    return false;
+}
