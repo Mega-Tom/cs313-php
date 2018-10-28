@@ -8,10 +8,9 @@ if(!isset($_SESSION["user"]))
     die();
 }
 
-require("dbConnect.php");
 require("_stratego.php");
 
-$db = db_connect();
+$db = get_db();
 
 $q = $db->prepare('select player1id, player2id, (select count(*) from move where gameid = game.id) as "count" from game where id = :gameid');
 $q->bindValue(":gameid", $_POST["game"], PDO::PARAM_INT);
