@@ -14,10 +14,11 @@
     
     <section id="main">
     <table class="board"><tbody>
-        <form action="signup.php" method="post">
+        
+        <form action="postsignup.php" method="post">
             Username: <input type="text" name="username"><br>
             Password: <input type="password" name="password"><br>
-            E-Mail:   <input type="email" name="email"><br>
+            <input type="submit">
         </form>
     </tbody></table>
     </section>

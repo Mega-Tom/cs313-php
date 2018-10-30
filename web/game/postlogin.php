@@ -2,19 +2,23 @@
     session_start();
     require "dbConnect.php";
 
-    $nmae = strtolower($_POST["username"]);
+    $name = strtolower($_POST["username"]);
     
     $db = get_db();
     
-    $q = $db->prepare("select id from Player where Playername = :name");
-    $q->bindValue(":name", $nmae, PDO::PARAM_STR);
+    $q = $db->prepare("select id, password from Player where Playername = :name");
+    $q->bindValue(":name", $name, PDO::PARAM_STR);
     $q->execute();
     $result = $q->fetchAll();
-    if(! $result[0]){
+    
+    if(! isset($result[0])){
         header("Location: login.php?invalid=true");
         die();
     }
-    $_SESSION["user"] = $result[0]["id"];
+    
+    if(password_verify($_POST["password"], $result[0]["password"])){
+        $_SESSION["user"] = $result[0]["id"];
+    }
     
     header("Location: index.php");
 ?>

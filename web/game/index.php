@@ -34,6 +34,8 @@
             echo "<li><a href='game.php?id=$game'> vs $opponent </a></li>";
         }
         echo "</ul>";
+    }else{
+        echo "You are not logged in.";
     }
 ?>
     </section>
