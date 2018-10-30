@@ -5,8 +5,13 @@
 
     $name = strtolower($_POST["username"]);
     $pass = strtolower($_POST["password"]);
+    $pass2 = strtolower($_POST["password2"]);
     $hash = password_hash($pass, PASSWORD_BCRYPT);
     
+    if($pass != $pass2){
+        header("Location: signup.php?invalid=nomatch");
+        die();
+    }
     
     
     $q = $db->prepare("select id FROM Player WHERE playername = :name");
@@ -14,7 +19,7 @@
     $q->execute();
     $result = $q->fetchAll();
     if(isset($result[0])){
-        header("Location: signup.php?invalid=true");
+        header("Location: signup.php?invalid=nameused");
         die();
     }
     

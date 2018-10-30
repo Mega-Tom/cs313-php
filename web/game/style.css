@@ -78,3 +78,7 @@ table.board td.active{
     border: white outset;
     width: 44px;
 }
+
+.error {
+    color: red;
+}
