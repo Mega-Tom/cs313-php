@@ -21,10 +21,10 @@
             Password: <input type="password" name="password2"><br>
             <input type="submit">
         </form>
-        <?php if(isSet($_GET["invalid"]) && $_GET["invalid"] = "nameused"): ?>
+        <?php if(isSet($_GET["invalid"]) && $_GET["invalid"] == "nameused"): ?>
                 <p class="error">Username not available!</p>
         <?php endif; ?>
-        <?php if(isSet($_GET["invalid"]) && $_GET["invalid"] = "nomatch"): ?>
+        <?php if(isSet($_GET["invalid"]) && $_GET["invalid"] == "nomatch"): ?>
                 <p class="error">Passwords do not match!</p>
         <?php endif; ?>
     </tbody></table>
