@@ -6,6 +6,7 @@
     $playerid = $_SESSION["user"];
     
     $player = get_player($gameid, $playerid);
+    $current = current_player($gameid);
     
     if(!$player)
     {
@@ -31,6 +32,13 @@
     <h1 class="center"> Stratigo Online </h1>
     
     <section id="main">
+    
+    <?php if($current == $player): ?>
+        <p>Your turn:</p>
+    <?php else: ?>
+        <p>Wating for your opponent...</p>
+    <?php endif; ?>
+    
     <table class="board"><tbody>
 <?php
     $board = board_position($_GET["id"]);
@@ -57,7 +65,7 @@
 ?>
     </tbody></table>
     </section>
-<?php if(current_player($gameid) == $player): ?>
+<?php if($current == $player): ?>
     <script src="game.js" type="text/javascript"></script>
 <?php endif; ?>
 </body>
