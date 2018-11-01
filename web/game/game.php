@@ -34,9 +34,9 @@
     <section id="main">
     
     <?php if($current == $player): ?>
-        <p>Your turn:</p>
+        <h3>Your turn:</h3>
     <?php else: ?>
-        <p>Wating for your opponent...</p>
+        <h3>Wating for your opponent...</h3>
     <?php endif; ?>
     
     <table class="board"><tbody>

@@ -9,7 +9,7 @@
     $hash = password_hash($pass, PASSWORD_BCRYPT);
     
     if($pass != $pass2){
-        header("Location: signup.php?invalid=nomatch");
+        header("Location: signup.php?error=nomatch");
         die();
     }
     
@@ -19,7 +19,7 @@
     $q->execute();
     $result = $q->fetchAll();
     if(isset($result[0])){
-        header("Location: signup.php?invalid=nameused");
+        header("Location: signup.php?error=nameused");
         die();
     }
     

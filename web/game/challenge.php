@@ -20,7 +20,7 @@
     <h1 class="center"> Stratigo Online </h1>
     
     <section id="main">
-        <form action="postchalenge.php" method="post">
+        <form action="postchallenge.php" method="post">
             Who would you like to chalenge? <input type="text" name="username"><br>
             <input type="submit">
         </form>

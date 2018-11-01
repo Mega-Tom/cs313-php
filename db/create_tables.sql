@@ -1,7 +1,7 @@
 CREATE TABLE Player(
 id SERIAL Primary Key,
 Playername varchar(30) NOT NULL UNIQUE,
-Password varchar(20) NOT NULL,
+Password varchar(256) NOT NULL,
 ranking int);
 
 CREATE TABLE Request(
@@ -16,7 +16,7 @@ player2Id int REFERENCES Player(id),
 initalSetup int[80],
 winner BOOL);
 
-CREATE TABLE "Move"(
+CREATE TABLE move(
 id SERIAL Primary Key,
 fromsqare int,
 tosquare int,
