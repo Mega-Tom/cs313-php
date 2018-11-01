@@ -17,7 +17,7 @@
     }
     $them = $result[0];
     
-    $q = $db->prepare("insert into Request (challengerId, challengedId) values (:you, :them)"
+    $q = $db->prepare("insert into Request (challengerId, challengedId) values (:you, :them)");
     $q->bindValue(":you", $you, PDO::PARAM_INT);
     $q->bindValue(":them", $them, PDO::PARAM_INT);
     $q->execute();
