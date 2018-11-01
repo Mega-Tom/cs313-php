@@ -11,11 +11,11 @@
     $q->bindValue(":name", $opponent_nmae, PDO::PARAM_STR);
     $q->execute();
     $result = $q->fetchAll();
-    if(! $result[0]){
-        header("Location: chalenge.php?invalid=true");
+    if(! isset($result[0])){
+        header("Location: challenge.php?invalid=true");
         die();
     }
-    $them = $result[0];
+    $them = $result[0]["id"];
     
     $q = $db->prepare("insert into Request (challengerId, challengedId) values (:you, :them)");
     $q->bindValue(":you", $you, PDO::PARAM_INT);
