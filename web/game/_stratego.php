@@ -195,5 +195,5 @@ function get_turn_number($gameid) {
 }
 
 function current_player($gameid) {
-    return array(BLUE, RED)[get_turn_number() % 2];
+    return array(BLUE, RED)[get_turn_number($gameid) % 2];
 }

@@ -14,7 +14,7 @@
         include('error.php'); 
         die();
     }
-    if(get_turn_number() != 0)
+    if(get_turn_number($gameid) != 0)
     {
         error_log("GAME: cannot setup in progress game:".$gameid);
         http_response_code(403);
