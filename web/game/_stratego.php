@@ -9,6 +9,20 @@ define("SPY", 0);
 define("RED",  1);
 define("BLUE", 2);
 
+define("PIECE_SET", Array(
+    BOMB => 6,
+    10 => 1,
+    9 => 1,
+    8 => 2,
+    7 => 3,
+    6 => 4,
+    5 => 4,
+    4 => 4,
+    3 => 5,
+    2 => 8,
+    SPY => 1,
+    FLAG => 1));
+
 class Piece {
     public $owner;
     public $value;
@@ -46,23 +60,10 @@ class Piece {
 function valid_setup($positions) {
     if(count($positions) != 80 || $positions[79] === NULL)
         return false;
-    $piece_set = Array(
-        BOMB => 6,
-        10 => 1,
-        9 => 1,
-        8 => 2,
-        7 => 3,
-        6 => 4,
-        5 => 4,
-        4 => 4,
-        3 => 5,
-        2 => 8,
-        SPY => 1,
-        FLAG => 1
-    );
+    
     foreach(Array(0,40) as $start){
         $pececounts = array_count_values(array_slice($positions, $start, 40));
-        if($pececounts != $piece_set) return false;
+        if($pececounts != PIECE_SET) return false;
     }
     return true;
 }
@@ -155,6 +156,17 @@ function board_position($id) {
     return $board;
 }
 
+function generate_board (){
+    $positions = array();
+    foreach(PIECE_SET as $piece => $count){
+        for($i = 0; $i < $count; i++){$positions[] = $piece;}
+    }
+    foreach(PIECE_SET as $piece => $count){
+        for($i = 0; $i < $count; i++){$positions[] = $piece;}
+    }
+    return setup_board($positions);
+}
+
 function get_player($gameid, $userid) {
     $db = get_db();
     $q = $db->prepare("SELECT fliped FROM gamedouble WHERE id = :game AND player1Id = :user");
@@ -168,16 +180,20 @@ function get_player($gameid, $userid) {
     return false;
 }
 
-function current_player($gameid) {
+function get_turn_number($gameid) {
     $db = get_db();
-    $q = $db->prepare('select (select count(*) from move where gameid = game.id) as "count" from game where id = :gameid');
+    $q = $db->prepare('select count(*) from move where gameid = :gameid');
     $q->bindValue(":gameid", $gameid, PDO::PARAM_INT);
     $q->Execute();
     
     $result = $q->fetchALL();
     
     if(isSet($result[0])) {
-        return array(BLUE, RED)[$result[0]["count"] % 2];
+        return $result[0]["count"] % 2];
     }
-    return false;
+    return 0;
+}
+
+function current_player($gameid) {
+    return array(BLUE, RED)[get_turn_number() % 2];
 }
