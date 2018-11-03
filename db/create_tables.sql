@@ -9,12 +9,26 @@ id SERIAL Primary Key,
 challengerId int REFERENCES Player(id),
 challengedId int REFERENCES Player(id));
 
+CREATE TYPE GameState
+   as enum ('no_setup','one_setup','two_setup','playing','one_won','two_won');
+
+CREATE OR REPLACE FUNCTION invertState(inputState GameState) RETURNS GameState AS $$
+    BEGIN
+        RETURN (CASE inputState
+            WHEN 'one_setup' THEN 'two_setup'
+            WHEN 'two_setup' THEN 'one_setup'
+            WHEN 'one_won'   THEN 'two_won'
+            WHEN 'two_won'   THEN 'one_won'
+            ELSE inputState END);
+    END;
+$$ LANGUAGE plpgsql;
+
 CREATE TABLE Game(
 id SERIAL Primary Key,
 player1Id int REFERENCES Player(id),
 player2Id int REFERENCES Player(id),
 initalSetup int[80],
-winner BOOL);
+state GameState);
 
 CREATE TABLE move(
 id SERIAL Primary Key,
@@ -24,7 +38,7 @@ seq int,
 gameID int REFERENCES Game(id));
 
 CREATE VIEW GameDouble AS
-    SELECT id, player1Id, player2Id, bool 'n' AS fliped from game
+    SELECT id, player1Id, player2Id, state, bool 'no' AS fliped from game
     UNION
-    SELECT id, player2ID, player1Id, bool 'y' AS fliped from game;
+    SELECT id, player2ID, player1Id, invertState(state), bool 'yes' AS fliped from game;
     
