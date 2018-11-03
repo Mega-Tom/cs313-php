@@ -27,7 +27,7 @@
     }
     
     $you = $results["you"];
-    $opp = $result["them"];
+    $opp = $results["them"];
 ?>
 <html>
 <head>

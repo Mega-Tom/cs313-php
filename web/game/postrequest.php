@@ -16,7 +16,7 @@
         header("Location: error.php");
         die();
     }
-    $them = $result[0]["challengerId"];
+    $them = $result[0]["challengerid"];
     
     if($_POST["accept"]){
         $q = $db->prepare("INSERT INTO Game (player1Id, player2Id) VALUES (:you, :them) RETURNING id");
@@ -42,4 +42,6 @@
         $q = $db->prepare("DELETE FROM Request WHERE id = :request");
         $q->bindValue(":request", $request, PDO::PARAM_INT);
         $q->execute();
+        
+        header("Location: index.php");
     }
