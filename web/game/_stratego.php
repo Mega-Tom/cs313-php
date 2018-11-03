@@ -189,7 +189,7 @@ function get_turn_number($gameid) {
     $result = $q->fetchALL();
     
     if(isSet($result[0])) {
-        return $result[0]["count"] % 2];
+        return $result[0]["count"];
     }
     return 0;
 }
