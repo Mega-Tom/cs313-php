@@ -82,7 +82,7 @@ table.board td.active{
     width: 44px;
 }
 
-table.board td.ui-sortable-placeholder.ui-sortable-handle {
+table.board td.ui-sortable-placeholder {
     display: none;
 }
 
