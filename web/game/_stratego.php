@@ -162,7 +162,7 @@ function generate_board (){
         for($i = 0; $i < $count; $i++){$positions[] = $piece;}
     }
     foreach(PIECE_SET as $piece => $count){
-        for($i = 0; $i < $count; i++){$positions[] = $piece;}
+        for($i = 0; $i < $count; $i++){$positions[] = $piece;}
     }
     return setup_board($positions);
 }
