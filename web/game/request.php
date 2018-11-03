@@ -9,7 +9,7 @@
                       'JOIN Player you ON you.id = r.challengedID '.
                       'JOIN Player them ON them.id = r.challengerID '.
                       'WHERE r.id = :id');
-    $q->bindValue(":id", $request);
+    $q->bindValue(":id", $request, PDO::PARAM_INT);
     $q->execute();
     
     $results = $q->fetchAll();
