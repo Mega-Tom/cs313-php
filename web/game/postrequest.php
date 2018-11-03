@@ -31,6 +31,10 @@
         
         $gameid = $result[0]["id"];
         
+        $q = $db->prepare("DELETE FROM Request WHERE id = :request");
+        $q->bindValue(":request", $request, PDO::PARAM_INT);
+        $q->execute();
+        
         header("Location: setup.php?game=$gameid");
     }
     else

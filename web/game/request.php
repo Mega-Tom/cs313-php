@@ -12,16 +12,20 @@
     $q->bindValue(":id", $request);
     $q->execute();
     
-    $results = $q.fetchAll();
+    $results = $q->fetchAll();
+    
     if(! isSet($results[0])){
         include "error.php";
         die();
     }
+    
     $results = $results[0];
+    
     if($results["id"] != $_SESSION["user"]){
         include "error.php";
         die();
     }
+    
     $you = $results["you"];
     $opp = $result["them"];
 ?>
