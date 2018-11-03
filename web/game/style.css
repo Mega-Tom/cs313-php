@@ -22,6 +22,9 @@ h1 {
     border: 5px outset goldenrod;
     width: 50%;
 }
+h2::first-letter {
+    text-trasform: uppercase;
+}
 
 .center{
     margin: auto;
@@ -79,6 +82,14 @@ table.board td.active{
     width: 44px;
 }
 
+table.board td.ui-sortable-placeholder.ui-sortable-handle {
+    display: none;
+}
+
+
 .error {
     color: red;
+}
+.inline {
+    display:inline;
 }
