@@ -159,7 +159,7 @@ function board_position($id) {
 function generate_board (){
     $positions = array();
     foreach(PIECE_SET as $piece => $count){
-        for($i = 0; $i < $count; i++){$positions[] = $piece;}
+        for($i = 0; $i < $count; $i++){$positions[] = $piece;}
     }
     foreach(PIECE_SET as $piece => $count){
         for($i = 0; $i < $count; i++){$positions[] = $piece;}
