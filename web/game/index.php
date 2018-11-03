@@ -50,7 +50,7 @@
             echo "<h2> Game requests: </h2>";
             echo "<ul>";
             foreach($results as $row){
-                $game = $row["request"];
+                $request = $row["request"];
                 $opponent = htmlspecialchars($row["opponent"]);
                 echo "<li> ";
                 echo "<a href='request.php?id=$request'> from $opponent </a>";
