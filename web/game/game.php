@@ -15,6 +15,17 @@
         include('error.php'); 
         die();
     }
+    if(!$current)
+    {
+        if(preg_match("/setup$/", gamestate($gameid))){
+            header("Location: setup.php?id=$gameid");
+            die();
+        }
+        if(preg_match("/won$/", gamestate($gameid))){
+            include("error.php");
+            die();
+        }
+    }
 ?>
 <html>
 <head>

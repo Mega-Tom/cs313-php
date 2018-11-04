@@ -14,7 +14,10 @@
         include('error.php'); 
         die();
     }
-    if(get_turn_number($gameid) != 0)
+    
+    if(!($state == 'one_setup' && $player == BLUE ||
+         $state == 'two_setup' && $player == RED  ||
+         $state ==  'no_setup'))
     {
         error_log("GAME: cannot setup in progress game:".$gameid);
         http_response_code(403);

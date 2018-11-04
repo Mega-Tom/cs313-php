@@ -26,10 +26,7 @@ $fliped = $results["fliped"];
 
 $offset = $fliped ? 41 : 1;
 
-if($old_state == 'one_setup' && $fliped){
-    $new_state = 'playing';
-}
-elseif($old_state == 'two_setup' && !$fliped){
+if($old_state == 'two_setup'){
     $new_state = 'playing';
 }
 elseif($old_state == 'no_setup'){

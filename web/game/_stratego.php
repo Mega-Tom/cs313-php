@@ -192,5 +192,27 @@ function get_turn_number($gameid) {
 }
 
 function current_player($gameid) {
-    return array(BLUE, RED)[get_turn_number($gameid) % 2];
+    $db = get_db();
+    $q = $db->prepare("select count(*) from move where gameid = :gameid and state = 'playing'");
+    $q->bindValue(":gameid", $gameid, PDO::PARAM_INT);
+    $q->Execute();
+    
+    $result = $q->fetchALL();
+    
+    if(isSet($result[0]))
+        return array(BLUE, RED)[$result[0]["count"] % 2];
+    return false;
+}
+
+function gamestate($gameid) {
+    $db = get_db();
+    $q = $db->prepare("select state from game where id = :gameid");
+    $q->bindValue(":gameid", $gameid, PDO::PARAM_INT);
+    $q->Execute();
+    
+    $result = $q->fetchALL();
+    
+    if(isSet($result[0]))
+        return $result[0]["state"];
+    return false;
 }
