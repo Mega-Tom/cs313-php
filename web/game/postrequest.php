@@ -19,7 +19,7 @@
     $them = $result[0]["challengerid"];
     
     if($_POST["accept"]){
-        $q = $db->prepare("INSERT INTO Game (player1Id, player2Id) VALUES (:you, :them) RETURNING id");
+        $q = $db->prepare("INSERT INTO Game (player1Id, player2Id, state) VALUES (:you, :them, 'no_setup') RETURNING id");
         $q->bindValue(":you", $you, PDO::PARAM_INT);
         $q->bindValue(":them", $them, PDO::PARAM_INT);
         $q->execute();
@@ -35,7 +35,7 @@
         $q->bindValue(":request", $request, PDO::PARAM_INT);
         $q->execute();
         
-        header("Location: setup.php?game=$gameid");
+        header("Location: setup.php?id=$gameid");
     }
     else
     {

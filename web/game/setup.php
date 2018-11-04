@@ -75,6 +75,7 @@
     }
 ?>
     </tbody></table>
+    <button id="submit">Submit setup</button>
     </section>
     <script src="setup.js" type="text/javascript"></script></body>
 </html>
