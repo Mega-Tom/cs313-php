@@ -56,8 +56,11 @@
     
     foreach($game->captured_pieces[BLUE] as $value -> $amount)
     {
-        echo "<span class='blue piece'>$value </span> ";
-        echo "X $amount";
+        try {
+            echo "<span class='blue piece'>$value </span> X $amount";
+        } catch(Error $e) {
+            var_dump($value);
+        }
     }
     
     foreach($game->board as $y => $row)
@@ -92,4 +95,3 @@
 <?php endif; ?>
 </body>
 </html>
-

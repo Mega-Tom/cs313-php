@@ -6,8 +6,8 @@ ranking int);
 
 CREATE TABLE Request(
 id SERIAL Primary Key,
-challengerId int REFERENCES Player(id),
-challengedId int REFERENCES Player(id));
+challengerId int NOT NULL REFERENCES Player(id),
+challengedId int NOT NULL REFERENCES Player(id));
 
 CREATE TYPE GameState
    as enum ('no_setup','one_setup','two_setup','playing','one_won','two_won');
@@ -25,16 +25,16 @@ $$ LANGUAGE plpgsql;
 
 CREATE TABLE Game(
 id SERIAL Primary Key,
-player1Id int REFERENCES Player(id),
-player2Id int REFERENCES Player(id),
+player1Id int NOT NULL REFERENCES Player(id),
+player2Id int NOT NULL REFERENCES Player(id),
 initalSetup int[80],
-state GameState);
+state GameState NOT NULL);
 
 CREATE TABLE move(
 id SERIAL Primary Key,
 fromsqare int,
 tosquare int,
-seq int,
+seq int NOT NULL,
 gameID int REFERENCES Game(id));
 
 CREATE VIEW GameDouble AS
