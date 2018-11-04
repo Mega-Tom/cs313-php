@@ -9,7 +9,7 @@ $db = get_db();
 
 $positions = $_POST["positions"];
 $gameid = $_POST["game"];
-$youid = $_SESSION["user"]
+$youid = $_SESSION["user"];
 
 $q = $db->prepare("select state, player2id, fliped from GameDouble where id = :gameid and player1id = :you");
 $q->bind_value(":gameid", $gameid, PDO::PARAM_INT);

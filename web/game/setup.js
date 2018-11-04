@@ -1,6 +1,6 @@
 $.ui.contains = $.contains; // hack nessisary for external library to work with newer jQuery
 
-var game_id = new URL(window.location.href).searchParams.get("id")};
+var game_id = new URL(window.location.href).searchParams.get("id");
 
 function textToVal(text){
     if(+text){
@@ -24,7 +24,8 @@ $(function(){
             method: "POST",
             data: {
                 positions: positions,
-                game: game_id,
+                game: game_id
+            },
             success: function(){
                 window.location = "game?id=" + game_id;
             },
@@ -33,4 +34,4 @@ $(function(){
             }
         })
     });
-})
+});
