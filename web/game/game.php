@@ -54,9 +54,7 @@
     $game = run_game($gameid);
     foreach($game->captured_pieces[BLUE] as $value => $amount)
     {
-        echo "<span class='blue piece'>";
-        var_dump($value);
-        echo " </span> X $amount";
+        echo "<span class='blue piece'> $value </span> X $amount";
     }
 ?>
     <table class="board"><tbody>
@@ -85,9 +83,9 @@
 ?>
     </tbody></table>
 <?php
-    foreach($game->captured_pieces[BLUE] as $value => $amount)
+    foreach($game->captured_pieces[RED] as $value => $amount)
     {
-        echo "<span class='blue piece'>? </span> X $amount";
+        echo "<span class='red piece'>$value </span> X $amount";
     }
 ?>
     </section>
