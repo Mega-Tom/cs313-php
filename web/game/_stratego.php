@@ -81,7 +81,7 @@ class Game {
         
         $current = array(RED, BLUE)[$i % 2];
         
-        $mover = $board[$fy][$fx];
+        $mover = $this->board[$fy][$fx];
         
         if( $mover == NULL || $mover->owner != $current) 
         {
@@ -92,12 +92,12 @@ class Game {
             throw new Exception("cannot move immobile piece $mover from square $from (on move $i)");
         }
         
-        $board[$fy][$fx] = NULL;
-        $targ = $board[$ty][$tx];
+        $this->board[$fy][$fx] = NULL;
+        $targ = $this->board[$ty][$tx];
         if(! in_range($fx, $fy, $tx, $ty)) {throw new Exception("cannot move from square $from to $to (on move $i)");}
         
         if($targ == NULL) {
-            $board[$ty][$tx] = $mover;
+            $this->board[$ty][$tx] = $mover;
         }else {
             if($mover->owner == $targ->owner) {throw new Exception("cannot attack own peice (on move $i)");}
             $attack = $mover->attack($targ);
@@ -105,10 +105,10 @@ class Game {
             if($attack == 'TIE'){
                 capture($mover);
                 capture($targ);
-                $board[$ty][$tx] = NULL;
+                $this->board[$ty][$tx] = NULL;
             }elseif($attack){
                 capture($targ);
-                $board[$ty][$tx] = $mover;
+                $this->board[$ty][$tx] = $mover;
             }else{
                 capture($mover);
             }
@@ -116,8 +116,8 @@ class Game {
     }
     
     function get_winner(){
-        if($captured_pieces[RED][FLAG] == 1) return BLUE;
-        if($captured_pieces[BLUE][FLAG] == 1) return RED;
+        if($this->captured_pieces[RED][FLAG] == 1) return BLUE;
+        if($this->captured_pieces[BLUE][FLAG] == 1) return RED;
         return false;
     }
 }
