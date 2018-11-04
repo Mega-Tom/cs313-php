@@ -11,8 +11,8 @@ $youid = $_SESSION["user"];
 if(array_count_values($positions) != PIECE_SET){throw new Exception("invalid setup");}
 
 $q = $db->prepare("select state, player2id, fliped from GameDouble where id = :gameid and player1id = :you");
-$q->bind_value(":gameid", $gameid, PDO::PARAM_INT);
-$q->bind_value(":you", $youid, PDO::PARAM_INT);
+$q->bindValue(":gameid", $gameid, PDO::PARAM_INT);
+$q->bindValue(":you", $youid, PDO::PARAM_INT);
 $q->execute();
 
 $results = $q.fetchAll();
@@ -47,5 +47,5 @@ foreach($positions as $i => $value){
 
 $query_string .= "state = '$new_state' WHERE id = :gameid";
 $q = $db->prepare($query_string);
-$q->bind_value(":gameid", $gameid, PDO::PARAM_INT);
+$q->bindValue(":gameid", $gameid, PDO::PARAM_INT);
 $q->execute();

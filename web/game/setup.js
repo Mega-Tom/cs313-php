@@ -6,7 +6,7 @@ function textToVal(text){
     if(+text){
         return +text;
     }
-    return {B:-1, F:-2, S:0}[text];
+    return {Q:-1, F:-2, S:0}[text];
 };
 
 $(function(){
