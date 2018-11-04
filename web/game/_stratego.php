@@ -68,11 +68,11 @@ class Game {
     }
     
     function capture($p){
-        if(!isset($this->captured_pieces[$p->owner][$p->value]))
+        if(!isset($this->captured_pieces[$p->owner][$p->str()]))
         {
-            $this->captured_pieces[$p->owner][$p->value] = 0;
+            $this->captured_pieces[$p->owner][$p->str()] = 0;
         }
-        $this->captured_pieces[$p->owner][$p->value]++;
+        $this->captured_pieces[$p->owner][$p->str()]++;
     }
     
     function do_move($from, $to, $i) {
