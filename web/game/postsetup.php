@@ -19,6 +19,7 @@ $results = $q->fetchAll();
 
 if(! isset($results[0])){throw new Exception("No game found");}
 
+$results = $results[0];
 $old_state = $results["state"];
 $opponentid = $results["player2id"];
 $fliped = $results["fliped"];
@@ -35,7 +36,7 @@ elseif($old_state == 'no_setup'){
     $new_state = $fliped ? 'two_setup' : 'one_setup';
 }
 else {
-    throw new Exception("You already setup!");
+    throw new Exception("You already setup! state:$old_state, fliped:$fliped");
 }
 
 $query_string = "UPDATE Game SET ";
