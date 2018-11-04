@@ -193,7 +193,7 @@ function get_turn_number($gameid) {
 
 function current_player($gameid) {
     $db = get_db();
-    $q = $db->prepare("select count(*) from move where gameid = :gameid and state = 'playing'");
+    $q = $db->prepare("select count(*) from move where gameid = :gameid");
     $q->bindValue(":gameid", $gameid, PDO::PARAM_INT);
     $q->Execute();
     
