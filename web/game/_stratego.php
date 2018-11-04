@@ -181,7 +181,7 @@ function run_game($id) {
     foreach($q->fetchall(PDO::FETCH_NUM) as $row) {
         $game = new Game($row);
     }
-    if(!$game){throw new Exception("Game not found:$id")}
+    if(!$game){throw new Exception("Game not found:$id");}
     
     $q = $db->prepare("SELECT fromsquare, tosquare, seq FROM move WHERE gameid = :id ORDER by seq");
     $q->BindValue(":id", $id);
