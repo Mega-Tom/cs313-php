@@ -26,10 +26,18 @@ $fliped = $results["fliped"];
 
 $offset = $fliped ? 40 : 0;
 
-if($old_state == 'one_setup' && $fliped){$new_state = 'playing'}
-elseif($old_state == 'two_setup' && !$fliped){$new_state = 'playing'}
-elseif($old_state == 'no_setup'){$new_state = $fliped ? 'two_setup' : 'one_setup'}
-else {throw new Exception("You already setup!");}
+if($old_state == 'one_setup' && $fliped){
+    $new_state = 'playing';
+}
+elseif($old_state == 'two_setup' && !$fliped){
+    $new_state = 'playing';
+}
+elseif($old_state == 'no_setup'){
+    $new_state = $fliped ? 'two_setup' : 'one_setup';
+}
+else {
+    throw new Exception("You already setup!");
+}
 
 $query_string = "UPDATE Game SET ";
 
