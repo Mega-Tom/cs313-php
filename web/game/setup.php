@@ -15,6 +15,8 @@
         die();
     }
     
+    $state = gamestate($gameid);
+    
     if(!($state == 'one_setup' && $player == BLUE ||
          $state == 'two_setup' && $player == RED  ||
          $state ==  'no_setup'))

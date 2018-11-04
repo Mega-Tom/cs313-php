@@ -17,11 +17,12 @@
     }
     if(!$current)
     {
-        if(preg_match("/setup$/", gamestate($gameid))){
+        $state = gamestate($gameid);
+        if(preg_match("/setup$/", $state)){
             header("Location: setup.php?id=$gameid");
             die();
         }
-        if(preg_match("/won$/", gamestate($gameid))){
+        if(preg_match("/won$/", $state)){
             include("error.php");
             die();
         }
