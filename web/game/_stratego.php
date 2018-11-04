@@ -122,8 +122,8 @@ class Game {
     }
     
     function get_winner(){
-        if($this->captured_pieces[RED][FLAG] == 1) return BLUE;
-        if($this->captured_pieces[BLUE][FLAG] == 1) return RED;
+        if($this->captured_pieces[RED]["F"] == 1) return BLUE;
+        if($this->captured_pieces[BLUE]["F"] == 1) return RED;
         return false;
     }
 }
