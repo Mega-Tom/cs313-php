@@ -50,18 +50,16 @@
         <h3>Wating for your opponent...</h3>
     <?php endif; ?>
     
-    <table class="board"><tbody>
 <?php
     $game = run_game($gameid);
-    
-    foreach($game->captured_pieces[BLUE] as $value -> $amount)
-    {
-        try {
-            echo "<span class='blue piece'>$value </span> X $amount";
-        } catch(Error $e) {
-            var_dump($value);
-        }
-    }
+    var_dump($game);
+//    foreach($game->captured_pieces[BLUE] as $value -> $amount)
+//    {
+//        echo "<span class='blue piece'>$value </span> X $amount";
+//    }
+?>
+    <table class="board"><tbody>
+<?php
     
     foreach($game->board as $y => $row)
     {
@@ -83,12 +81,14 @@
         }
         echo "</tr>";
     }
-    foreach($game->captured_pieces[RED] as $value -> $amount)
-    {
-        echo "<span class='red piece'> $value </span> X $amount";
-    }
 ?>
     </tbody></table>
+<?php
+//    foreach($game->captured_pieces[BLUE] as $value -> $amount)
+//    {
+//        echo "<span class='blue piece'>$value </span> X $amount";
+//    }
+?>
     </section>
 <?php if($current == $player): ?>
     <script src="game.js" type="text/javascript"></script>
