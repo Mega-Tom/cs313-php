@@ -27,7 +27,7 @@ $(function(){
                 game: game_id
             },
             success: function(){
-                window.location = "game?id=" + game_id;
+                window.location = "game.php?id=" + game_id;
             },
             error: function(){
                 alert("Error submitting move!");
