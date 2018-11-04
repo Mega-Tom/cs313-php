@@ -11,8 +11,10 @@ require("_stratego.php");
 
 $db = get_db();
 
+$gameid = $_POST["game"];
+
 $q = $db->prepare('select player1id, player2id, (select count(*) from move where gameid = game.id) as "count" from game where id = :gameid');
-$q->bindValue(":gameid", $_POST["game"], PDO::PARAM_INT);
+$q->bindValue(":gameid", $gameid, PDO::PARAM_INT);
 $q->execute();
 $result = $q->fetchALL();
 
@@ -47,7 +49,7 @@ $q = $db->prepare("insert into move(fromsquare,tosquare,seq,gameid) values (:fro
 $q->bindValue(":from", $_POST["from"], PDO::PARAM_INT);
 $q->bindValue(":to", $_POST["to"], PDO::PARAM_INT);
 $q->bindValue(":seq", $seq, PDO::PARAM_INT);
-$q->bindValue(":game", $_POST["game"], PDO::PARAM_INT);
+$q->bindValue(":game", $gameid, PDO::PARAM_INT);
 $q->execute();
 
 if($game->get_winner()){
