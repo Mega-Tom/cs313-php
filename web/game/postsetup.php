@@ -24,7 +24,7 @@ $old_state = $results["state"];
 $opponentid = $results["player2id"];
 $fliped = $results["fliped"];
 
-$offset = $fliped ? 40 : 0;
+$offset = $fliped ? 41 : 1;
 
 if($old_state == 'one_setup' && $fliped){
     $new_state = 'playing';
