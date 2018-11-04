@@ -68,6 +68,10 @@ class Game {
     }
     
     function capture($p){
+        if(!isset($this->captured_pieces[$p->owner][$p->value]))
+        {
+            $this->captured_pieces[$p->owner][$p->value] = 0;
+        }
         $this->captured_pieces[$p->owner][$p->value]++;
     }
     
@@ -105,11 +109,11 @@ class Game {
             $attack = $mover->attack($targ);
             
             if($attack == 'TIE'){
-                capture($mover);
-                capture($targ);
+                $this->capture($mover);
+                $this->capture($targ);
                 $this->board[$ty][$tx] = NULL;
             }elseif($attack){
-                capture($targ);
+                $this->capture($targ);
                 $this->board[$ty][$tx] = $mover;
             }else{
                 capture($mover);
