@@ -56,7 +56,8 @@
     
     foreach($game->captured_pieces[BLUE] as $value -> $amount)
     {
-        echo "<span class='blue piece'> $value </span> X $amount";
+        echo "<span class='blue piece'>$value </span> ";
+        echo "X $amount";
     }
     
     foreach($game->board as $y => $row)
