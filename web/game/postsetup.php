@@ -1,6 +1,5 @@
 <?php
 session_start();
-require "dbConnect.php";
 require "_stratego.php";
 
 if(array_count_values($positions) != PIECE_SET){throw new Exception("invalid setup");}
