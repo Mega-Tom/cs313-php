@@ -72,7 +72,7 @@ class Game {
     }
     
     function do_move($from, $to, $i) {
-        if(this->get_winner())
+        if($this->get_winner())
         $fy = intdiv($from, 10);
         $fx = $from % 10;
         
