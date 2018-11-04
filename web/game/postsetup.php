@@ -15,7 +15,7 @@ $q->bindValue(":gameid", $gameid, PDO::PARAM_INT);
 $q->bindValue(":you", $youid, PDO::PARAM_INT);
 $q->execute();
 
-$results = $q.fetchAll();
+$results = $q->fetchAll();
 
 if(! isset($results[0])){throw new Exception("No game found");}
 
