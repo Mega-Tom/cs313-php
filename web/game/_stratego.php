@@ -116,7 +116,7 @@ class Game {
                 $this->capture($targ);
                 $this->board[$ty][$tx] = $mover;
             }else{
-                capture($mover);
+                $this->capture($mover);
             }
         }
     }
