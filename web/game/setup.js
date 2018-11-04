@@ -23,7 +23,7 @@ $(function(){
         $.ajax("postsetup.php", {
             method: "POST",
             data: {
-                positions: positions,
+                "positions[]": positions,
                 game: game_id
             },
             success: function(){

@@ -2,13 +2,13 @@
 session_start();
 require "_stratego.php";
 
-if(array_count_values($positions) != PIECE_SET){throw new Exception("invalid setup");}
-
 $db = get_db();
 
 $positions = $_POST["positions"];
 $gameid = $_POST["game"];
 $youid = $_SESSION["user"];
+
+if(array_count_values($positions) != PIECE_SET){throw new Exception("invalid setup");}
 
 $q = $db->prepare("select state, player2id, fliped from GameDouble where id = :gameid and player1id = :you");
 $q->bind_value(":gameid", $gameid, PDO::PARAM_INT);
