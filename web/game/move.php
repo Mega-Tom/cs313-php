@@ -34,9 +34,9 @@ if($_SESSION["user"] != $next_player_id)
 }
 
 
-$board = board_position($_POST["game"]);
+$game = run_game($gameid);
 try{
-    do_move($board, $_POST["from"], $_POST["to"], $seq);
+    $game->do_move($_POST["from"], $_POST["to"], $seq);
 }catch(Exception $e) {
     error_log("GAME: ".$e->getMessage());
     http_response_code(400);
@@ -49,3 +49,12 @@ $q->bindValue(":to", $_POST["to"], PDO::PARAM_INT);
 $q->bindValue(":seq", $seq, PDO::PARAM_INT);
 $q->bindValue(":game", $_POST["game"], PDO::PARAM_INT);
 $q->execute();
+
+if($game->get_winner()){
+    $state = $next_color == RED ? 'one_won' : 'two_won' ;
+    $q = $db->prepare("UPDATE Game set state = :state WHERE id = :game");
+    
+    $q->bindValue(":state", $state, PDO::PARAM_STR);
+    $q->bindValue(":game", $_POST["game"], PDO::PARAM_INT);
+    $q->execute();
+}
