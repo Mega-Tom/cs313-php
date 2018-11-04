@@ -57,6 +57,71 @@ class Piece {
     }
 }
 
+class Game {
+    public $board;
+    public $captured_pieces;
+    
+    
+    function __construct($position) {
+        $this->board = setup_board($position);
+        $this->captured_pieces = array(RED=>array(), BLUE=>array());
+    }
+    
+    function capture($p){
+        $this->captured_pieces[$p->owner][$p->value]++;
+    }
+    
+    function do_move($from, $to, $i) {
+        if(this->get_winner())
+        $fy = intdiv($from, 10);
+        $fx = $from % 10;
+        
+        $ty = intdiv($to, 10);
+        $tx = $to % 10;
+        
+        $current = array(RED, BLUE)[$i % 2];
+        
+        $mover = $board[$fy][$fx];
+        
+        if( $mover == NULL || $mover->owner != $current) 
+        {
+            throw new Exception("player $current cannot move from square $from (on move $i)");
+        }
+        if( $mover->value == BOMB || $mover->value == FLAG)
+        {
+            throw new Exception("cannot move immobile piece $mover from square $from (on move $i)");
+        }
+        
+        $board[$fy][$fx] = NULL;
+        $targ = $board[$ty][$tx];
+        if(! in_range($fx, $fy, $tx, $ty)) {throw new Exception("cannot move from square $from to $to (on move $i)");}
+        
+        if($targ == NULL) {
+            $board[$ty][$tx] = $mover;
+        }else {
+            if($mover->owner == $targ->owner) {throw new Exception("cannot attack own peice (on move $i)");}
+            $attack = $mover->attack($targ);
+            
+            if($attack == 'TIE'){
+                capture($mover);
+                capture($targ);
+                $board[$ty][$tx] = NULL;
+            }elseif($attack){
+                capture($targ);
+                $board[$ty][$tx] = $mover;
+            }else{
+                capture($mover);
+            }
+        }
+    }
+    
+    function get_winner(){
+        if($captured_pieces[RED][FLAG] == 1) return BLUE;
+        if($captured_pieces[BLUE][FLAG] == 1) return RED;
+        return false;
+    }
+}
+
 function valid_setup($positions) {
     if(count($positions) != 80 || $positions[79] === NULL)
         return false;
@@ -94,36 +159,7 @@ function in_range($x1, $y1, $x2, $y2) {
     return false;
 }
 
-function do_move(&$board, $from, $to, $i) {
-    $fy = intdiv($from, 10);
-    $fx = $from % 10;
-    
-    $ty = intdiv($to, 10);
-    $tx = $to % 10;
-    
-    $current = array(RED, BLUE)[$i % 2];
-    
-    $mover = $board[$fy][$fx];
-    if(
-        $mover == NULL ||
-        $mover->owner != $current) {throw new Exception("player $current cannot move from square $from (on move $i)");}
-    if(
-        $mover->value == BOMB ||
-        $mover->value == FLAG) {throw new Exception("cannot move immobile piece $mover from square $from (on move $i)");}
-    $board[$fy][$fx] = NULL;
-    $targ = $board[$ty][$tx];
-    if(! in_range($fx, $fy, $tx, $ty)) {throw new Exception("cannot move from square $from to $to (on move $i)");}
-    if($targ == NULL) {
-        $board[$ty][$tx] = $mover;
-    }else {
-        if($mover->owner == $targ->owner) {throw new Exception("cannot attack own peice (on move $i)");}
-        if($mover->attack($targ)){
-            $board[$ty][$tx] = $mover;
-        }
-    }
-}
-
-function board_position($id) {
+function run_game($id) {
     $db = get_db();
     $query_string = "SELECT initalSetup[1]";
     for($i = 2; $i <= 80; $i++) {
@@ -136,7 +172,7 @@ function board_position($id) {
     $q->Execute();
     
     foreach($q->fetchall(PDO::FETCH_NUM) as $row) {
-        $board = setup_board($row);
+        $game = new Game($row);
     }
     
     $q = $db->prepare("SELECT fromsquare, tosquare, seq FROM move WHERE gameid = :id ORDER by seq");
@@ -151,9 +187,9 @@ function board_position($id) {
         if($i != $old_i + 1) throw new Exception("move jump between $old_i and $i");
         $old_i = $i;
         
-        do_move($board, $row["fromsquare"], $row["tosquare"], $i);
+        $game->do_move($row["fromsquare"], $row["tosquare"], $i);
     }
-    return $board;
+    return $game;
 }
 
 function generate_board (){

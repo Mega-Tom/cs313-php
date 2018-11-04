@@ -52,8 +52,12 @@
     
     <table class="board"><tbody>
 <?php
-    $board = board_position($_GET["id"]);
-    foreach($board as $y => $row)
+    $game = run_game($gameid);
+    foreach($game->captured_pieces[BLUE] as $value -> $amount)
+    {
+        echo "<span class='blue piece'> $value </span> X $amount";
+    }
+    foreach($game->board as $y => $row)
     {
         echo "<tr>";
         foreach($row as $x => $piece)
@@ -72,6 +76,10 @@
             echo("</td>");
         }
         echo "</tr>";
+    }
+    foreach($game->captured_pieces[RED] as $value -> $amount)
+    {
+        echo "<span class='red piece'> $value </span> X $amount";
     }
 ?>
     </tbody></table>
