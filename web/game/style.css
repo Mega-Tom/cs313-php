@@ -71,10 +71,10 @@ table.board td, .piece{
     font-weight: bolder;
     font-size: x-large;
 }
-.red{
+#main .red{
     background: red;
 }
-.blue{
+#main .blue{
     background: blue
 }
 table.board td.active{
