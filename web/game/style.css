@@ -82,6 +82,11 @@ table.board td.active{
     width: 44px;
 }
 
+span.piece {
+    display: inline-block;
+    vertical-align: middle;
+}
+
 table.board td.ui-sortable-placeholder {
     display: none;
 }
