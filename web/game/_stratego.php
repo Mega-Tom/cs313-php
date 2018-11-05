@@ -108,7 +108,7 @@ class Game {
             if($mover->owner == $targ->owner) {throw new Exception("cannot attack own peice (on move $i)");}
             $attack = $mover->attack($targ);
             
-            if($attack == 'TIE'){
+            if($attack === 'TIE'){
                 $this->capture($mover);
                 $this->capture($targ);
                 $this->board[$ty][$tx] = NULL;
@@ -237,7 +237,7 @@ function get_turn_number($gameid) {
 
 function current_player($gameid) {
     $db = get_db();
-    $q = $db->prepare("select count(*) from move where gameid = :gameid");
+    $q = $db->prepare('select count(*) from move where gameid = :gameid');
     $q->bindValue(":gameid", $gameid, PDO::PARAM_INT);
     $q->Execute();
     

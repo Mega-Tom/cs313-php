@@ -17,11 +17,16 @@
     }
     
     $state = gamestate($gameid);
-    if(preg_match("/setup$/", $state)){
+    if($state == 'one_setup' && $player == BLUE ||
+       $state == 'two_setup' && $player == RED  ||
+       $state ==  'no_setup')
+    {
         header("Location: setup.php?id=$gameid");
         die();
     }
-    if(preg_match("/won$/", $state)){
+    
+    if($state != 'playing')
+    {
         include("error.php");
         die();
     }
