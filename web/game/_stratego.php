@@ -201,13 +201,18 @@ function run_game($id) {
 }
 
 function generate_board (){
-    $positions = array();
+    $red_setup = array();
     foreach(PIECE_SET as $piece => $count){
-        for($i = 0; $i < $count; $i++){$positions[] = $piece;}
+        for($i = 0; $i < $count; $i++){$red_setup[] = $piece;}
     }
+    $blue_setup = array();
     foreach(PIECE_SET as $piece => $count){
-        for($i = 0; $i < $count; $i++){$positions[] = $piece;}
+        for($i = 0; $i < $count; $i++){$blue_setup[] = $piece;}
     }
+    shuffle($blue_setup);
+    shuffle($red_setup);
+    
+    $positions = array_merge($red_setup, $blue_setup);
     return setup_board($positions);
 }
 
