@@ -69,7 +69,7 @@
         $results = $q->fetchAll();
         
         if(isset($results[0])) {
-            echo "<h2> Game requests you sent: </h2>";
+            echo "<h2> Game requests waiting for responce: </h2>";
             echo "<ul>";
             foreach($results as $row){
                 $request = $row["request"];

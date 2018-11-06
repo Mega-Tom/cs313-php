@@ -1,6 +1,7 @@
 <?php
     session_start();
     require "dbConnect.php";
+    require "_stratego.php";
 
     $you = $_SESSION["user"];
     $request = $_POST["request"];
