@@ -19,17 +19,12 @@
     $state = gamestate($gameid);
     if($state == 'one_setup' && $player == BLUE ||
        $state == 'two_setup' && $player == RED  ||
-       $state ==  'no_setup')
+       $state == 'no_setup')
     {
         header("Location: setup.php?id=$gameid");
         die();
     }
     
-    if($state != 'playing')
-    {
-        include("error.php");
-        die();
-    }
 ?>
 <html>
 <head>
@@ -48,8 +43,12 @@
     
     <section id="main">
     
-    <?php if($current == $player): ?>
+    <?php if($state == 'playing' && $current == $player): ?>
         <h3>Your turn:</h3>
+    <?php elseif($state == 'one_won' && $player == RED || $state == 'two_won' && $player == BLUE): ?>
+        <h3>You won!</h3>
+    <?php elseif($state == 'two_won' && $player == RED || $state == 'one_won' && $player == BLUE): ?>
+        <h3>You lost!</h3>
     <?php else: ?>
         <h3>Wating for your opponent...</h3>
     <?php endif; ?>
@@ -93,7 +92,7 @@
     }
 ?>
     </section>
-<?php if($current == $player): ?>
+<?php if($state == 'playing' && $current == $player): ?>
     <script src="game.js" type="text/javascript"></script>
 <?php endif; ?>
 </body>
