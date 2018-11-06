@@ -9,6 +9,7 @@
 
     <section id="main">
         <a href="store">My store</a>
+        <a href="game">Stratego Online</a>
     </section>
     
 </body>
