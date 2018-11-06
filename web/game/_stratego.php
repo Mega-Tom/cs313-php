@@ -209,10 +209,10 @@ function random_valid_start_position (){
     foreach(PIECE_SET as $piece => $count){
         for($i = 0; $i < $count; $i++){$blue_setup[] = $piece;}
     }
-    shuffle($blue_setup);
     shuffle($red_setup);
+    shuffle($blue_setup);
     
-    return $positions;
+    return array_merge($red_setup, $blue_setup);
 }
 
 function generate_board (){
