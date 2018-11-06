@@ -1,6 +1,6 @@
 <?php
 
-require "dbConnect.php";
+require_once "dbConnect.php";
 
 define("BOMB", -1);
 define("FLAG", -2);
