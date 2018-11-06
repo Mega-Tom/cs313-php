@@ -53,7 +53,9 @@
     
     <table class="board"><tbody>
 <?php
-    $board = generate_board();
+    $game = run_game($gameid);
+    $board = $game->board;
+    
     $yourclass = ($player == RED) ? '"red mobile"':'"blue mobile"';
     $theirclass = ($player == RED) ? '"blue"':'"red"';
     
