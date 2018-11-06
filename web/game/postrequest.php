@@ -25,7 +25,7 @@
         $q = $db->prepare("INSERT INTO Game (player1Id, player2Id, state, initalSetup) VALUES (:you, :them, 'no_setup', :setup) RETURNING id");
         $q->bindValue(":you", $you, PDO::PARAM_INT);
         $q->bindValue(":them", $them, PDO::PARAM_INT);
-        $q->bindValue(":setup", $setup, PDO::PARAM_str);
+        $q->bindValue(":setup", $setup, PDO::PARAM_STR);
         $q->execute();
         $result = $q->fetchAll();
         
