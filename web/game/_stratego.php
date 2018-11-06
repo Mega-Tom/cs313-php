@@ -200,7 +200,7 @@ function run_game($id) {
     return $game;
 }
 
-function generate_board (){
+function random_valid_start_position (){
     $red_setup = array();
     foreach(PIECE_SET as $piece => $count){
         for($i = 0; $i < $count; $i++){$red_setup[] = $piece;}
@@ -212,8 +212,11 @@ function generate_board (){
     shuffle($blue_setup);
     shuffle($red_setup);
     
-    $positions = array_merge($red_setup, $blue_setup);
-    return setup_board($positions);
+    return $positions;
+}
+
+function generate_board (){
+    return setup_board(random_valid_start_position());
 }
 
 function get_player($gameid, $userid) {

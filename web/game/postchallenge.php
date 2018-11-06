@@ -3,7 +3,7 @@
     require "dbConnect.php";
 
     $you = $_SESSION["user"];
-    $opponent_nmae = $_POST["username"];
+    $opponent_nmae = strtolower($_POST["username"]);
     
     $db = get_db();
     
