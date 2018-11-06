@@ -20,7 +20,7 @@
     $them = $result[0]["challengerid"];
     
     if($_POST["accept"]){
-        $setup = '{' . random_valid_start_position().implode(',') . '}';
+        $setup = '{' . implode(random_valid_start_position(), ',') . '}';
     
         $q = $db->prepare("INSERT INTO Game (player1Id, player2Id, state, initalSetup) VALUES (:you, :them, 'no_setup', :setup) RETURNING id");
         $q->bindValue(":you", $you, PDO::PARAM_INT);
