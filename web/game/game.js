@@ -47,7 +47,7 @@ $(function(){
             }
         }
         else{
-            if($(this).html() != ""){
+            if($(this).html() != "" && $(this).html() != "Q" && $(this).html() != "F"){
                 pieceSelected = $(this);
                 $(this).addClass("active");
             }
